@@ -1,0 +1,62 @@
+@if (!success) {
+  <div class="checkout">
+    <div class="container">
+      <div style="display: grid; width: 85%; margin: 0 auto;">
+        <p>You will be charged 50$ for the service you selected.</p>
+        <ngx-stripe-card-group [formGroup]="stripeTest" [elementsOptions]="elementsOptions">
+          <p class="label">Card Holder Name</p>
+          <input formControlName="name" class="input" placeholder="Name on Card" required />
+          <p class="label">Card Number</p>
+          <div class="stripe-element">
+            <ngx-stripe-card-number [options]="cardOptions"></ngx-stripe-card-number>
+          </div>
+          <p class="label">Expiry Date</p>
+          <div class="stripe-element">
+            <ngx-stripe-card-expiry [options]="cardOptions"></ngx-stripe-card-expiry>
+          </div>
+          <p class="label">CVC</p>
+          <div class="stripe-element">
+            <ngx-stripe-card-cvc [options]="cardOptions"></ngx-stripe-card-cvc>
+          </div>
+        </ngx-stripe-card-group>
+      </div>
+      <div class="buttons">
+        <button class="back" (click)="back()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+          </svg>
+          Back
+        </button>
+        <button class="finish" [disabled]="isLoading" (click)="pay()">
+          Checkout
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="success">
+    <div class="container">
+    <span class="icon-container">
+      <span class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2"
+             viewBox="0 0 16 16">
+          <path
+            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
+        </svg>
+      </span>
+    </span>
+      <p class="heading">Payment Made Successfully</p>
+      <p class="extra-text">Payment has been made<br /> successfully.</p>
+      <button class="finish" (click)="back()">Done</button>
+    </div>
+  </div>
+}

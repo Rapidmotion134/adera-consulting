@@ -1,0 +1,31 @@
+.pages {
+
+  .pages-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 2rem;
+
+    .page {
+      display: grid;
+      grid-template-rows: 1fr 1.2fr;
+      border: 1px solid #005e5a;
+
+      .thumbnail {
+        background-color: #005e5a;
+      }
+
+      .title {
+        padding: 1rem 1rem 0;
+        font-size: 18px;
+        margin: 0;
+      }
+
+      .text {
+        padding: 0 1rem 1rem;
+        font-size: 12px;
+        margin: 0;
+      }
+    }
+  }
+}

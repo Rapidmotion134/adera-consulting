@@ -22,12 +22,18 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^20.1.7",
+    "@angular/cdk": "^20.1.6",
     "@angular/common": "^20.1.0",
     "@angular/compiler": "^20.1.0",
     "@angular/core": "^20.1.0",
     "@angular/forms": "^20.1.0",
+    "@angular/material": "^20.1.6",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
+    "@stripe/stripe-js": "^7.8.0",
+    "ngx-stripe": "^20.7.0",
+    "jose": "^5.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

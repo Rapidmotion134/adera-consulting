@@ -1,0 +1,72 @@
+<div>
+  @if (isAdmin) {
+    <div>
+      <p class="title">Action</p>
+      <div class="flex button">
+      <span class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+        </svg>
+      </span>
+        <p>Create Page</p>
+      </div>
+    </div>
+    <ng-container>
+      <table mat-table matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let page; index as i">{{ i + 1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let page"> {{page.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="link">
+          <th mat-header-cell *matHeaderCellDef> Type </th>
+          <td mat-cell *matCellDef="let page"> {{page.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let page">
+            <img [ngSrc]="page.image" width="40" height="40" [alt]="page.title">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let page">
+            <p class="view"> <!--(click)="openDialog(document)"-->
+              Edit
+            </p>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[20]"
+                     #doc
+                     showFirstLastButtons="true">
+      </mat-paginator>
+    </ng-container>
+  } @else {
+    <div class="pages-container">
+      @for (page of pages; track page.id) {
+        <div class="page">
+          <div class="thumbnail">
+            <img [ngSrc]="page.image" width="100" height="80" alt="thumbnail">
+          </div>
+          <div>
+            <p class="title">{{page.title}}</p>
+            <p class="text">
+              {{ page.description }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

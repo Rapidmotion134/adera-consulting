@@ -1,0 +1,33 @@
+.users {
+  width: 95%;
+  margin: 1rem auto;
+
+  .icon.button{
+    cursor: pointer;
+  }
+
+  table {
+    border: 1px solid #e1e3e5;
+    box-shadow: none;
+
+    .more {
+      display: grid;
+      place-items: center;
+      padding: .5rem;
+      cursor: pointer;
+      border-radius: 100px;
+      border: none;
+      background-color: white;
+      transition: background-color .3s ease ;
+
+      &:hover {
+        background-color: #e1e3e5;
+      }
+    }
+
+    a {
+      color: #42b546;
+      text-decoration: none;
+    }
+  }
+}

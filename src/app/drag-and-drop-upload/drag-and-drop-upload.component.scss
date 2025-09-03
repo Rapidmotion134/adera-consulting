@@ -1,0 +1,39 @@
+.drop-zone {
+  width: 100%;
+  border: 1px solid #005e5a;
+  padding: 2rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #ccc;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  margin: 0 auto 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  .icon {
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    border-radius: 100px;
+    background-color: #f5faf5;
+    color: #005e5a;
+  }
+
+  p {
+    color: black;
+    margin-bottom: 0;
+  }
+}
+
+.drop-zone.dragover {
+  background-color: #dcf5e2;
+}
+
+.file-list {
+  margin-top: 20px;
+  text-align: center;
+}
