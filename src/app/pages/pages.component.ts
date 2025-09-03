@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../data.service';
 import {Page} from '../interfaces';
-import {DatePipe, NgOptimizedImage, TitleCasePipe} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatTableResponsiveModule} from '../mat-table-responsive/mat-table-responsive.module';
 import {MatPaginator} from '@angular/material/paginator';
