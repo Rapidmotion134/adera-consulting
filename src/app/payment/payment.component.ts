@@ -2,13 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {environment} from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-responsive.module";
 import { MatButtonModule } from '@angular/material/button';
 import {DataService} from '../data.service';
-import {Order} from '@stripe/stripe-js';
-import Payment = Order.Payment;
 import {NgClass, TitleCasePipe} from '@angular/common';
+import {Payment} from '../interfaces';
 
 @Component({
     selector: 'app-payment',
@@ -18,6 +17,7 @@ import {NgClass, TitleCasePipe} from '@angular/common';
     MatButtonModule,
     TitleCasePipe,
     NgClass,
+    RouterLink,
   ],
     templateUrl: './payment.component.html',
     styleUrl: './payment.component.scss'
@@ -32,46 +32,37 @@ export class PaymentComponent implements OnInit{
   payments: MatTableDataSource<Payment> = new MatTableDataSource<Payment>([]);
 
   constructor(private http: HttpClient,
-              private route: ActivatedRoute,
               private dataService: DataService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    // const param = `${this.route.snapshot.queryParamMap.get('state')}`;
-    // if(+param === 1 ){
-    //   this.state = 1;
-    // } else {
-    //   this.state = 2;
-    // }
     this.dataService.isAdmin$.subscribe((data) => {
       this.isAdmin = data;
     });
-
+    if (this.isAdmin) {
+      this.http.get<Payment[]>(`${this.baseUrl}/payment`)
+        .subscribe((data: Payment[]) => {
+          if (data && data.length > 0) {
+            this.payments = new MatTableDataSource<Payment>(data);
+          }
+        })
+    } else {
+      this.http.get<Payment[]>(`${this.baseUrl}/payment/${this.userId}`)
+        .subscribe((data: Payment[]) => {
+          if (data && data.length > 0) {
+            this.payments = new MatTableDataSource<Payment>(data);
+          }
+        })
+    }
     if (!this.isFirst) {
       this.state = 1
     }
   }
 
-  // openDialog(service: Service): void {
-  //   if (isValidKey(service.name.toLowerCase().replace(/\s+/g, ""))) {
-  //     const dialogRef = this.dialog.open(FormDialog, {
-  //     width: '500px',
-  //     data: { service },
-  //     });
-  //     dialogRef.afterClosed().subscribe((result) => {
-  //       if (result) {
-  //         this.checkout(service, result);
-  //       }
-  //     });
-  //   } else {
-  //     this.checkout(service, '');
-  //   }
-  // }
-
-  checkout () {
-    // localStorage.setItem('service', JSON.stringify(service));
-    this.router.navigate(['/', 'checkout']).then(()=> {return;});
+  checkout (payment: Payment) {
+    localStorage.setItem('payment', JSON.stringify(payment));
+    this.router.navigate(['/', 'checkout', payment.id]).then(()=> {return;});
   }
 
 }

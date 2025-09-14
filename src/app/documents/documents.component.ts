@@ -14,7 +14,7 @@ import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {SharedService} from "../shared.service";
 
 @Component({
-    selector: 'app-documents',
+  selector: 'app-documents',
   imports: [
     MatTableModule,
     ReactiveFormsModule,

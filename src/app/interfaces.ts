@@ -4,7 +4,7 @@ export interface User {
   lastName: string;
   email: string;
   phone: string;
-  address1: string;
+  address: string;
   registrationDate: Date;
   isAdmin: boolean;
   isActive: boolean;
@@ -19,6 +19,7 @@ export interface Document {
   isRequested: boolean;
   issueDate: Date;
   expiryDate: Date;
+  isRead: boolean;
   url: string;
   user: User;
   request: Request;
@@ -45,6 +46,8 @@ export interface Payment {
   title: string;
   type: string;
   productId: string;
+  stripeAmount: number;
+  amount: number;
   date: Date;
   url: string;
   isPaid: boolean;

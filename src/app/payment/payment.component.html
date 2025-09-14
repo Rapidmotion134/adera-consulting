@@ -27,20 +27,115 @@
           </div>
         </div>
       </ng-container>
-    } @else if (state === 1) {
-
     } @else {
+      <ng-container>
+        <p class="title">Payments</p>
+        <table mat-table matTableResponsive [dataSource]="payments" class="mat-elevation-z8">
+          <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let payment; let i = index">{{ i + 1 }}</td>
+          </ng-container>
 
+          <ng-container matColumnDef="service">
+            <th mat-header-cell *matHeaderCellDef> Service </th>
+            <td mat-cell *matCellDef="let payment">
+              {{payment.service}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> User </th>
+            <td mat-cell *matCellDef="let payment">
+              {{ payment.user.firstName + ' ' + payment.user.lastName }}
+            </td>
+          </ng-container>
+
+          @if (state === 1) {
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef> Stripe Amount </th>
+              <td mat-cell *matCellDef="let payment">
+                {{ payment.stripeAmount }}
+              </td>
+            </ng-container>
+          } @else {
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef> Birr Amount </th>
+              <td mat-cell *matCellDef="let payment">
+                {{ payment.amount }}
+              </td>
+            </ng-container>
+          }
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let payment">
+              {{ payment.id }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let payment">
+              {{ payment.date }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let payment">
+              <p class="status" [ngClass]="{'paid': payment.isPaid , 'unpaid': !payment.isPaid }">
+                {{ payment.isPaid ? 'Paid' : 'Unpaid' | titlecase }}
+              </p>
+            </td>
+          </ng-container>
+
+          @if (state === 1) {
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let payment">
+                @if (!payment.isPaid) {
+                  <p class="view" (click)="checkout(payment)">
+                    View Details
+                  </p>
+                }
+              </td>
+            </ng-container>
+          } @else {
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let payment">
+                @if (!payment.isPaid) {
+                  <p class="view" [routerLink]="['/', 'payment', 'attach', payment.id]">
+                    View Details
+                  </p>
+                }
+              </td>
+            </ng-container>
+          }
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="button-container">
+          <button class="back-button" (click)="state = 0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+                 viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+            Back
+          </button>
+        </div>
+      </ng-container>
     }
   } @else {
     <div>
       <p class="title">Action</p>
-      <div class="flex button">
-      <span class="icon-container">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="bi bi-plus" viewBox="0 0 16 16">
-          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-        </svg>
-      </span>
+      <div class="flex button" [routerLink]="['select']">
+        <span class="icon-container">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+          </svg>
+        </span>
         <p>Initiate Payment</p>
       </div>
     </div>

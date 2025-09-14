@@ -25,7 +25,7 @@ export class SelectUserComponent implements OnInit{
   baseUrl: string = environment.baseUrl;
   search!: string;
 
-  displayedColumns: string[] = ['id', 'name', 'phone', 'bought', 'regDate', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'phone', 'regDate', 'action'];
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
   filteredDataSource: MatTableDataSource<User> = new MatTableDataSource();
 
@@ -41,6 +41,9 @@ export class SelectUserComponent implements OnInit{
       case 'invoice':
         this.selectFor = 'invoice';
         break;
+      case 'payment':
+          this.selectFor = 'payment';
+          break;
       default:
         this.selectFor = 'request';
         break;

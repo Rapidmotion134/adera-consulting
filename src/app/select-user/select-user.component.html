@@ -36,10 +36,6 @@
       <td mat-cell *matCellDef="let user"> {{user["phone"]}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="bought">
-      <th mat-header-cell *matHeaderCellDef> Services Bought </th>
-      <td mat-cell *matCellDef="let user">{{user.services.length}}</td>
-    </ng-container>
 
     <ng-container matColumnDef="regDate">
       <th mat-header-cell *matHeaderCellDef> Registration Date </th>

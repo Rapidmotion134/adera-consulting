@@ -11,20 +11,16 @@
       </div>
     </div>
     <div class="section">
-      <div class="grid">
-        <div class="child">
-          <p>Document Title</p>
-          <input type="text" [(ngModel)]="title" name="title" class="title-input" placeholder="Enter Document Title" required>
-        </div>
-        @if (!isRequest) {
+      @if (!isPayment) {
+        <div class="grid">
           <div class="child">
-            <p>Document Type</p>
-            <select name="type" class="type" [(ngModel)]="type">
-
-            </select>
+            <p>Document Title</p>
+            <input type="text" [(ngModel)]="title" name="title" class="title-input" placeholder="Enter Document Title" required>
           </div>
-        }
-      </div>
+        </div>
+      } @else {
+        <p class="title">Attach Receipt</p>
+      }
       <div class="upload">
         <p>Upload File</p>
         <app-drag-and-drop-upload
