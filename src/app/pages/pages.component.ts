@@ -5,6 +5,7 @@ import {NgOptimizedImage} from '@angular/common';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatTableResponsiveModule} from '../mat-table-responsive/mat-table-responsive.module';
 import {MatPaginator} from '@angular/material/paginator';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-pages',
@@ -13,6 +14,7 @@ import {MatPaginator} from '@angular/material/paginator';
     MatTableModule,
     MatTableResponsiveModule,
     MatPaginator,
+    RouterLink,
   ],
   templateUrl: './pages.component.html',
   styleUrl: './pages.component.scss'

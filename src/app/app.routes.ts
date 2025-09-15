@@ -10,6 +10,7 @@ import {PaymentComponent} from './payment/payment.component';
 import {CheckoutComponent} from './checkout/checkout.component';
 import {PagesComponent} from './pages/pages.component';
 import {GeneratePaymentComponent} from './payment-request/generate-payment.component';
+import {CreatePage} from './create-page/create-page';
 // import {NotificationsComponent} from "./notifications/notifications.component";
 // import {OrdersComponent} from "./orders/orders.component";
 // import {ViewOrderComponent} from "./view-order/view-order.component";
@@ -40,6 +41,7 @@ export const routes: Routes = [
   { path: 'payment/attach', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
   { path: 'checkout/:paymentId', pathMatch: 'full', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'pages', pathMatch: 'full', component: PagesComponent, canActivate: [AuthGuard] },
+  { path: 'pages/create', pathMatch: 'full', component: CreatePage, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
 ];

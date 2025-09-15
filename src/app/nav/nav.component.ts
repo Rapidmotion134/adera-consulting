@@ -8,7 +8,7 @@ import {NavigationEnd, Router, RouterLink} from "@angular/router";
 import {AuthService} from "../auth/auth.service";
 import { HttpClient } from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Document, Notification} from "../interfaces";
+// import {Document, Notification} from "../interfaces";
 // import {DocumentDialog} from "../company-documents/document-dialog";
 // import {MatDialog} from "@angular/material/dialog";
 import {animate, state, style, transition, trigger} from "@angular/animations";
@@ -17,7 +17,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     selector: 'app-nav',
     templateUrl: './nav.component.html',
     styleUrl: './nav.component.scss',
-  imports: [MatButtonModule, MatMenuModule, MatDivider, MatBadge, TitleCasePipe, RouterLink, NgOptimizedImage],
+  imports: [MatButtonModule, MatMenuModule, MatDivider, /*MatBadge,*/ TitleCasePipe, RouterLink, NgOptimizedImage],
     animations: [
         trigger('detailExpand', [
             state('opened', style({ visibility: 'visible', opacity: 1 })),
@@ -40,8 +40,8 @@ export class NavComponent implements OnInit, AfterViewInit {
   page!: string;
   baseUrl: string = environment.baseUrl;
   userId: string = `${localStorage.getItem('userId')}`;
-  notifications: Notification[] = [];
-  document!: Document;
+  // notifications: Notification[] = [];
+  // document!: Document;
   // dialog = inject(MatDialog);
   isNavOpen: boolean = false;
   navbar: HTMLElement | null = null;
@@ -63,17 +63,17 @@ export class NavComponent implements OnInit, AfterViewInit {
          }
       }
     });
-    this.http.get<Notification[]>(this.baseUrl + `notification/user/unread/${(this.userId)}`)
-      .subscribe((data) => {
-        if (data.length) {
-          data.sort((a, b) => {
-            if (a.date > b.date) return -1;
-            if (a.date < b.date) return 1;
-            return 0;
-          });
-          this.notifications = data;
-        }
-      });
+    // this.http.get<Notification[]>(this.baseUrl + `notification/user/unread/${(this.userId)}`)
+    //   .subscribe((data) => {
+    //     if (data.length) {
+    //       data.sort((a, b) => {
+    //         if (a.date > b.date) return -1;
+    //         if (a.date < b.date) return 1;
+    //         return 0;
+    //       });
+    //       this.notifications = data;
+    //     }
+    //   });
   }
 
   ngAfterViewInit() {
@@ -106,31 +106,31 @@ export class NavComponent implements OnInit, AfterViewInit {
   //   }
   // }
 
-  viewNotification(notification: Notification, index: number) {
-    switch (notification.title) {
-      case 'Expiration Notification':
-      case 'New Document Received':
-        // this.openDialog(notification.item);
-        break;
-      case 'New User':
-        this.router.navigate(['/','users', 'view', notification.item])
-          .then(() => {return;})
-        break;
-      case 'New Order Received':
-        this.router.navigate(['/','orders', notification.item])
-          .then(() => {return;})
-        break;
-      case 'Document Request':
-        this.router.navigate(['/','document', 'request'])
-          .then(() => {return;})
-        break;
-      case 'Payment Received':
-        break;
-    }
-    this.http.patch(this.baseUrl + `notification/${notification.id}`, {})
-      .subscribe();
-    this.notifications.splice(index, 1);
-  }
+  // viewNotification(notification: Notification, index: number) {
+  //   switch (notification.title) {
+  //     case 'Expiration Notification':
+  //     case 'New Document Received':
+  //       // this.openDialog(notification.item);
+  //       break;
+  //     case 'New User':
+  //       this.router.navigate(['/','users', 'view', notification.item])
+  //         .then(() => {return;})
+  //       break;
+  //     case 'New Order Received':
+  //       this.router.navigate(['/','orders', notification.item])
+  //         .then(() => {return;})
+  //       break;
+  //     case 'Document Request':
+  //       this.router.navigate(['/','document', 'request'])
+  //         .then(() => {return;})
+  //       break;
+  //     case 'Payment Received':
+  //       break;
+  //   }
+  //   this.http.patch(this.baseUrl + `notification/${notification.id}`, {})
+  //     .subscribe();
+  //   this.notifications.splice(index, 1);
+  // }
 
   toggleNavbar() {
     this.isNavOpen = !this.isNavOpen;
