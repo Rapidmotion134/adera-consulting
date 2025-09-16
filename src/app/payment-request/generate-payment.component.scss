@@ -24,7 +24,7 @@
 
     .icon {
       background-color: white;
-      color: #42b546;
+      color: #005e5a;
       padding: .5rem;
       display: grid;
       place-items: center;
@@ -45,6 +45,7 @@
 
     .grid {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 2rem;
       margin: 1rem auto 1.5rem;
       justify-items: center;
@@ -61,7 +62,7 @@
         width: 75%;
         border-radius: 7px;
         padding: .75rem 1.5rem;
-        border: 1px solid #42b546;
+        border: 1px solid #005e5a;
 
         &:focus {
           outline: none;
@@ -93,7 +94,7 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      background-color: #42b546;
+      background-color: #005e5a;
       color: white;
 
       .icon {

@@ -57,7 +57,7 @@ export class FileUploadService implements IFileUploadService {
           // @ts-ignore
           if (res['message'] === 'File uploaded successfully') {
             // @ts-ignore
-            done.url = res['s3Uri'];
+            done.url = res['name'];
           }
           return done;
         }),

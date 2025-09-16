@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, Output} from '@angular/core';
-import {DecimalPipe, NgClass, NgIf} from "@angular/common";
+import {DecimalPipe, NgClass} from "@angular/common";
 import {environment} from "../../environments/environment";
 import {IFileUploadService, UploadProgress} from "./service/file-upload.service.interface";
 import {FILE_UPLOAD_SERVICE} from "./service/file-upload.service.provider";
@@ -8,7 +8,7 @@ import {merge, Observable} from "rxjs";
 
 @Component({
     selector: 'app-drag-and-drop-upload',
-    imports: [NgIf, DecimalPipe, NgClass],
+    imports: [DecimalPipe, NgClass],
     templateUrl: './drag-and-drop-upload.component.html',
     styleUrl: './drag-and-drop-upload.component.scss'
 })

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, inject, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {DatePipe, NgClass, TitleCasePipe} from "@angular/common";
+import {DatePipe, NgClass} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Document, /*Invoice, Request*/} from "../interfaces";
@@ -21,7 +21,6 @@ import {SharedService} from "../shared.service";
     MatTableResponsiveModule,
     FormsModule,
     NgClass,
-    TitleCasePipe,
     DatePipe,
     // RouterLink,
     MatPaginatorModule,
@@ -145,6 +144,16 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
   //     }
   //   });
   // }
+
+  download(document: Document) {
+    this.sharedService.getDownloadUrl(document.url);
+    this.http.patch<Document>(`${this.baseUrl}document/update/status/${document.id}`,{})
+      .subscribe((data) => {
+        if (data?.id) {
+          this.ngOnInit();
+        }
+      });
+  }
 
   openDialog(document: Document) {
     const dialogRef = this.dialog.open(DocumentDialog, {

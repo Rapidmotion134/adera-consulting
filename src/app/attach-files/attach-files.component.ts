@@ -31,9 +31,11 @@ export class AttachFilesComponent implements OnInit{
   baseUrl: string = environment.baseUrl;
   title!: string;
   type!: string;
-  // isRequest!: boolean;
-  isPayment!: boolean;
+  isRequest: boolean = false;
+  isDocument: boolean = false;
+  isPayment: boolean = false;
   userId: any;
+  paymentId: any;
   url!: string;
   success: boolean = false;
 
@@ -43,13 +45,15 @@ export class AttachFilesComponent implements OnInit{
 
   ngOnInit() {
     const first = this.route.snapshot.url[0].path;
-    if ( first === 'document') {
-      this.userId = this.route.snapshot.paramMap.get('userId');
-    } else if (first === 'payment') {
+    const second = this.route.snapshot.url[1].path;
+    if (first === 'payment') {
       this.isPayment = true;
-    } /*else {
+    } else if ( first === 'document' && second === 'sendTo') {
+      this.isDocument = true;
       this.userId = this.route.snapshot.paramMap.get('userId');
-    }*/
+    } else {
+      this.isRequest = true;
+    }
   }
 
   navigateBack() {
@@ -65,16 +69,24 @@ export class AttachFilesComponent implements OnInit{
 
   sendDocument(){
     if (this.isPayment) {
-      this.http.post<Payment>(this.baseUrl + ` `, {
-
+      this.http.post<Payment>(this.baseUrl + `payment/${this.paymentId}`, {
+        url: this.url,
       }).subscribe((data) => {
         if (data.isPaid) {
           this.success = true;
         }
       })
+    } else if (this.isDocument) {
+      this.http.post<Document>(this.baseUrl + `document/user/${this.userId}`, {
+        title: this.title, url: this.url, type: this.type
+      }).subscribe((data) => {
+        if (data.url) {
+          this.success = true;
+        }
+      })
     } else {
-      this.http.post<Document>(this.baseUrl + ` `, {
-
+      this.http.post<Document>(this.baseUrl + `document/requested`, {
+        title: this.title, type: this.type, url: this.url
       }).subscribe((data) => {
         if (data.url) {
           this.success = true;

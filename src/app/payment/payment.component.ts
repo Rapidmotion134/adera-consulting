@@ -41,14 +41,14 @@ export class PaymentComponent implements OnInit{
       this.isAdmin = data;
     });
     if (this.isAdmin) {
-      this.http.get<Payment[]>(`${this.baseUrl}/payment`)
+      this.http.get<Payment[]>(`${this.baseUrl}payment`)
         .subscribe((data: Payment[]) => {
           if (data && data.length > 0) {
             this.payments = new MatTableDataSource<Payment>(data);
           }
         })
     } else {
-      this.http.get<Payment[]>(`${this.baseUrl}/payment/${this.userId}`)
+      this.http.get<Payment[]>(`${this.baseUrl}payment/${this.userId}`)
         .subscribe((data: Payment[]) => {
           if (data && data.length > 0) {
             this.payments = new MatTableDataSource<Payment>(data);

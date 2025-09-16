@@ -16,7 +16,9 @@
   or drag and drop PDF, DOCX, PNG files
 </div>
 
-<div class="file-list" *ngIf="file">
-  <h3>Uploaded File:</h3>
-  <p *ngIf="file">{{ file.name }} ({{ file.size / 1024 | number: '1.0-0' }} KB)</p>
-</div>
+@if (file) {
+  <div class="file-list">
+    <h3>Uploaded File:</h3>
+    <p>{{ file.name }} ({{ file.size / 1024 | number: '1.0-0' }} KB)</p>
+  </div>
+}

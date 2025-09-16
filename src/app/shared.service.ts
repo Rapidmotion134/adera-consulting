@@ -12,7 +12,7 @@ export class SharedService {
 
   getDownloadUrl(fileKey: string) {
     this.http.get(
-      `${this.baseUrl}document/download?fileKey=${fileKey}`,
+      `${this.baseUrl}upload/${fileKey}`,
       {
         responseType: 'blob' as const, // Properly typed for blob response
         observe: 'response' // To get full response including headers

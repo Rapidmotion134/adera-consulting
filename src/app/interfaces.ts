@@ -17,12 +17,11 @@ export interface Document {
   isSent: boolean;
   productId: string;
   isRequested: boolean;
-  issueDate: Date;
-  expiryDate: Date;
+  date: Date;
   isRead: boolean;
   url: string;
   user: User;
-  request: Request;
+  // request: Request;
 }
 
 export interface Notification {

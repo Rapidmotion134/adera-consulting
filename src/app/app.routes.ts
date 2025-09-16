@@ -27,7 +27,7 @@ export const routes: Routes = [
   // { path: 'users/edit', pathMatch: 'full', component: CreateAccountComponent, canActivate: [AuthGuard] },
   { path: 'document/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
   { path: 'document/sendTo/:userId', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
-  // { path: 'document/request', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
+  { path: 'document/request', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
   // { path: 'request/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
   // { path: 'request/sendTo/:userId', pathMatch: 'full', component: RequestDocumentComponent, canActivate: [AuthGuard] },
   // { path: 'actions', pathMatch: 'full', component: ActionsComponent, canActivate: [AuthGuard] },
