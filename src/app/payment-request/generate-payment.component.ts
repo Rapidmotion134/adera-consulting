@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {Location} from "@angular/common";
-import {DragAndDropUploadComponent} from "../drag-and-drop-upload/drag-and-drop-upload.component";
 import { HttpClient } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
@@ -20,7 +19,12 @@ export class GeneratePaymentComponent implements OnInit{
   baseUrl: string = environment.baseUrl;
   userId: any;
   title: any;
-  url: any;
+  bankName: any;
+  accountName: any;
+  accountNumber: any;
+  stripeAmount!: any;
+  amount!: any;
+  success: boolean = true;
 
   constructor(
     private location: Location,
@@ -36,18 +40,25 @@ export class GeneratePaymentComponent implements OnInit{
     this.location.back();
   }
 
-  onFileUploaded(fileUploadEvent: { url: string; index: number }): void {
-    this.url = fileUploadEvent.url;
-    console.log(this.url);
+  done () {
+    this.title = '';
+    this.bankName = '';
+    this.accountName = '';
+    this.accountNumber = '';
+    this.stripeAmount = undefined;
+    this.amount = undefined;
+    this.success = false;
   }
 
-  sendInvoice() {
-    if (this.userId && this.title && this.url) {
+  sendPayment() {
+    if (this.userId && this.title && this.accountName && this.accountNumber
+    && this.bankName && this.amount && this.stripeAmount) {
       this.http.post<Payment>(this.baseUrl + 'payment', {
-        title: this.title, url: this.url, userId: this.userId
+        title: this.title, userId: this.userId, stripeAmount: this.stripeAmount, amount: this.amount,
+        bankName: this.bankName, accountName: this.accountName, bankAccount: this.accountNumber,
       }).subscribe((data) => {
         if (data) {
-          this.location.back();
+          this.success = true;
         }
       });
     }

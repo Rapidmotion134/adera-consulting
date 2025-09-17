@@ -56,7 +56,7 @@ export interface Payment {
 export interface Page {
   id: number;
   title: string;
-  link: string;
+  url: string;
   description: string;
   image: string;
 }

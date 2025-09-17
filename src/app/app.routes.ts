@@ -11,10 +11,10 @@ import {CheckoutComponent} from './checkout/checkout.component';
 import {PagesComponent} from './pages/pages.component';
 import {GeneratePaymentComponent} from './payment-request/generate-payment.component';
 import {CreatePage} from './create-page/create-page';
+import {CreateAccountComponent} from "./create-account/create-account.component";
 // import {NotificationsComponent} from "./notifications/notifications.component";
 // import {OrdersComponent} from "./orders/orders.component";
 // import {ViewOrderComponent} from "./view-order/view-order.component";
-// import {CreateAccountComponent} from "./create-account/create-account.component";
 // import {RequestDocumentComponent} from "./request-document/request-document.component";
 // import {ViewUserComponent} from "./view-user/view-user.component";
 
@@ -23,18 +23,16 @@ export const routes: Routes = [
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'users', pathMatch: 'full', component: UsersComponent, canActivate: [AuthGuard] },
   // { path: 'users/view/:userId', pathMatch: 'full', component: ViewUserComponent, canActivate: [AuthGuard] },
-  // { path: 'users/create', pathMatch: 'full', component: CreateAccountComponent, canActivate: [AuthGuard] },
-  // { path: 'users/edit', pathMatch: 'full', component: CreateAccountComponent, canActivate: [AuthGuard] },
+  { path: 'users/create', pathMatch: 'full', component: CreateAccountComponent, canActivate: [AuthGuard] },
+  { path: 'users/edit', pathMatch: 'full', component: CreateAccountComponent, canActivate: [AuthGuard] },
   { path: 'document/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
   { path: 'document/sendTo/:userId', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
   { path: 'document/request', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
   // { path: 'request/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
   // { path: 'request/sendTo/:userId', pathMatch: 'full', component: RequestDocumentComponent, canActivate: [AuthGuard] },
-  // { path: 'actions', pathMatch: 'full', component: ActionsComponent, canActivate: [AuthGuard] },
   { path: 'documents', pathMatch: 'full', component: DocumentsComponent, canActivate: [AuthGuard] },
   // { path: 'documents/:userId', pathMatch: 'full', component: DocumentsComponent, canActivate: [AuthGuard] },
   // { path: 'notifications', pathMatch: 'full', component: NotificationsComponent, canActivate: [AuthGuard] },
-  // { path: 'notifications/expiring', pathMatch: 'full', component: NotificationsComponent, canActivate: [AuthGuard] },
   { path: 'payment', pathMatch: 'full', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'payment/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
   { path: 'payment/sendTo/:userId', pathMatch: 'full', component: GeneratePaymentComponent, canActivate: [AuthGuard] },

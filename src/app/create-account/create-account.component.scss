@@ -1,4 +1,4 @@
-.generate-invoice {
+.create-user {
   width: 95%;
   margin: 1.5rem auto;
 
@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 6rem 1rem 1.5rem;
+    padding: 1rem 1rem 1rem 1.5rem;
     border: 1px solid #e1e3e5;
 
     .icon {
@@ -45,33 +45,53 @@
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
+      width: 85%;
       margin: 1rem auto 1.5rem;
-      justify-items: center;
 
       .child {
-        width: 85%;
+        width: 100%;
       }
 
       p {
         margin: 0 0 .5rem;
       }
+    }
 
-      .input {
-        width: 75%;
-        border-radius: 7px;
-        padding: .75rem 1.5rem;
-        border: 1px solid #005e5a;
+    //.flex {
+    //  gap: 2rem;
+    //  width: 85%;
+    //  margin: 1rem auto 1.5rem;
+    //  justify-content: center;
+    //
+    //  .child {
+    //    flex-basis: 33%;
+    //  }
+    //
+    //  .input {
+    //    width: 100%;
+    //  }
+    //
+    //  p {
+    //    margin: 0 0 .5rem;
+    //  }
+    //}
 
-        &:focus {
-          outline: none;
-        }
+    .input {
+      width: 100%;
+      border-radius: 7px;
+      padding: .75rem 1.5rem;
+      border: 1px solid #005e5a;
+
+      &:focus {
+        outline: none;
       }
     }
 
     .upload {
       width: 85%;
+      margin: 0 auto;
     }
   }
 
@@ -79,20 +99,17 @@
     display: flex;
     gap: 1.5rem;
     justify-content: space-evenly;
-    background-color: white;
-    border: 1px solid #e1e3e5;
-    border-top: none;
     padding: 1.5rem;
+    background-color: white;
 
-    button{
-      width: 25%;
+    button {
       display: flex;
-      gap: .25rem;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
+      border: 1px solid #005e5a;
       padding: .75rem 2rem;
-      border: none;
       border-radius: 10px;
+      gap: .25rem;
       cursor: pointer;
       background-color: #005e5a;
       color: white;
@@ -102,22 +119,61 @@
         place-items: center;
       }
     }
+
+    .back-button {
+      text-align: left;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .section {
+    .grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .flex {
+      width: 100% !important;
+
+      .child {
+        width: 100%;
+      }
+    }
   }
 }
 
 @media (max-width: 475px) {
-  .generate-invoice {
+  .create-user {
     .title {
       font-size: 18px;
     }
 
+    .section {
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .flex {
+        flex-direction: column;
+        width: 85% !important;
+
+        .child {
+          width: 100%;
+        }
+      }
+    }
+
     .buttons {
+      padding: .75rem 0 !important;
+
       .back-button {
         width: 80% !important;
       }
 
       .send-button {
         width: 80% !important;
+        gap: .25rem;
       }
     }
   }

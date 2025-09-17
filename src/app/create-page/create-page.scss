@@ -1,4 +1,4 @@
-.attach {
+.create-page {
   width: 95%;
   margin: 1.5rem auto;
   border: 1px solid #005e5a;
@@ -60,63 +60,23 @@
       p {
         margin: 0 0 .5rem;
       }
+    }
 
-      .title-input {
-        width: 100%;
-        border-radius: 7px;
-        padding: .75rem 1.5rem;
-        border: 1px solid #005e5a;
+    .input {
+      width: 100%;
+      border-radius: 7px;
+      padding: .75rem 1.5rem;
+      border: 1px solid #005e5a;
 
-        &:focus {
-          outline: none;
-        }
-      }
-
-      .type {
-        width: 100%;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        border: 1px solid #005e5a;
-        padding: .75rem 1.5rem;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/> </svg>');
-        background-repeat: no-repeat;
-        background-position: right 1rem center;
-        background-size: 20px;
-        border-radius: 7px;
+      &:focus {
         outline: none;
-        ///* For Firefox */
-        //-moz-padding-right: 30px;
-
-        &::after {
-          content: '';
-          position: absolute;
-          right: 15px;
-          top: 50%;
-          transform: translateY(-50%);
-          pointer-events: none;
-        }
-
-        option {
-          background-color: #fff;
-          font-size: 16px;
-        }
       }
     }
 
-    //.dates {
-    //  display: grid;
-    //  grid-template-columns: 1fr 1fr;
-    //  align-items: center;
-    //  justify-content: space-between;
-    //  gap: 2rem;
-    //  width: 85%;
-    //  margin: 1rem auto;
-    //
-    //  p {
-    //    margin: 0 0 .5rem;
-    //  }
-    //}
+    .description {
+      width: 85%;
+      margin: 0 auto;
+    }
 
     .upload {
       width: 85%;
