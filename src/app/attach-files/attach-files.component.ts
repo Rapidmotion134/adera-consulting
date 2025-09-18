@@ -69,7 +69,7 @@ export class AttachFilesComponent implements OnInit{
 
   sendDocument(){
     if (this.isPayment) {
-      this.http.post<Payment>(this.baseUrl + `payment/${this.paymentId}`, {
+      this.http.post<Payment>(this.baseUrl + `payment/${this.paymentId}/`, {
         url: this.url,
       }).subscribe((data) => {
         if (data.isPaid) {
@@ -77,7 +77,7 @@ export class AttachFilesComponent implements OnInit{
         }
       })
     } else if (this.isDocument) {
-      this.http.post<Document>(this.baseUrl + `document/user/${this.userId}`, {
+      this.http.post<Document>(this.baseUrl + `document/user/${this.userId}/`, {
         title: this.title, url: this.url, type: this.type
       }).subscribe((data) => {
         if (data.url) {
@@ -85,7 +85,7 @@ export class AttachFilesComponent implements OnInit{
         }
       })
     } else {
-      this.http.post<Document>(this.baseUrl + `document/requested`, {
+      this.http.post<Document>(this.baseUrl + `document/requested/`, {
         title: this.title, type: this.type, url: this.url
       }).subscribe((data) => {
         if (data.url) {

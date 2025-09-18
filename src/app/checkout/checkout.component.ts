@@ -72,7 +72,7 @@ export class CheckoutComponent implements OnInit {
   pay(): void {
     this.isLoading = true;
     if (this.stripeTest.valid) {
-      this.http.post<any>(this.baseUrl + 'stripe/payment',  {
+      this.http.post<any>(this.baseUrl + 'stripe/payment/',  {
 
       })
         .pipe(

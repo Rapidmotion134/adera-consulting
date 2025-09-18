@@ -90,7 +90,7 @@ export class CreateAccountComponent implements OnInit {
     } else if (!this.isEdit && this.password && this.confirmPassword && this.lastName
       && this.firstName && this.email && this.phone && this.address) {
       if (this.password === this.confirmPassword) {
-        this.http.post(this.baseUrl + 'user', {
+        this.http.post(this.baseUrl + 'user/', {
           password: this.password, lastName: this.lastName, firstName: this.firstName,
           email: this.email, phone: this.phone, address: this.address,
         }).pipe(

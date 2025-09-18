@@ -43,8 +43,9 @@ export interface Notification {
 export interface Payment {
   id: number;
   title: string;
-  type: string;
-  productId: string;
+  bankName: string;
+  bankAccount: string;
+  accountName: string;
   stripeAmount: number;
   amount: number;
   date: Date;

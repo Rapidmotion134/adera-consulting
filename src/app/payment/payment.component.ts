@@ -6,7 +6,7 @@ import {Router, RouterLink} from "@angular/router";
 import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-responsive.module";
 import { MatButtonModule } from '@angular/material/button';
 import {DataService} from '../data.service';
-import {NgClass, TitleCasePipe} from '@angular/common';
+import {DatePipe, NgClass, TitleCasePipe} from '@angular/common';
 import {Payment} from '../interfaces';
 
 @Component({
@@ -18,6 +18,7 @@ import {Payment} from '../interfaces';
     TitleCasePipe,
     NgClass,
     RouterLink,
+    DatePipe,
   ],
     templateUrl: './payment.component.html',
     styleUrl: './payment.component.scss'
@@ -25,7 +26,7 @@ import {Payment} from '../interfaces';
 export class PaymentComponent implements OnInit{
   state: 0 | 1 | 2 = 0;
   baseUrl: string = environment.baseUrl;
-  displayedColumns: string[] = ['no', 'service', 'name', 'amount', 'id', 'date', 'status', 'action'];
+  displayedColumns: string[] = ['no', 'service', 'name', 'amount', 'date', 'status', 'action'];
   userId: any = localStorage.getItem('userId');
   isFirst: boolean = true;
   isAdmin!: boolean;

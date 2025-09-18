@@ -24,7 +24,7 @@ export class GeneratePaymentComponent implements OnInit{
   accountNumber: any;
   stripeAmount!: any;
   amount!: any;
-  success: boolean = true;
+  success: boolean = false;
 
   constructor(
     private location: Location,
@@ -53,7 +53,7 @@ export class GeneratePaymentComponent implements OnInit{
   sendPayment() {
     if (this.userId && this.title && this.accountName && this.accountNumber
     && this.bankName && this.amount && this.stripeAmount) {
-      this.http.post<Payment>(this.baseUrl + 'payment', {
+      this.http.post<Payment>(this.baseUrl + 'payment/', {
         title: this.title, userId: this.userId, stripeAmount: this.stripeAmount, amount: this.amount,
         bankName: this.bankName, accountName: this.accountName, bankAccount: this.accountNumber,
       }).subscribe((data) => {

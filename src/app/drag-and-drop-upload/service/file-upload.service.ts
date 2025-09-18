@@ -17,7 +17,7 @@ export class FileUploadService implements IFileUploadService {
   ) { }
 
   upload(fileToUpload: File): Observable<UploadProgress> {
-    const url = `${environment.baseUrl}upload`;
+    const url = `${environment.baseUrl}upload/`;
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 

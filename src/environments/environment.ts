@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  // baseUrl: 'https://adera.box.et/api/',
   baseUrl: 'http://localhost:3000/api/',
   implementation: 'HTTP',
   STRIPE_PUBLIC_KEY: 'pk_live_51QUXObJtZUwAyH7vWzkA3jTnzoSUmMwVqzihKTVQY1ubR8mtbZZ9ZaZqyVIOkIxxVxlK9leOZX84XCnEGB3uwEPa00Tyr2oloX',

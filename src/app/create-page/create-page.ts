@@ -41,7 +41,7 @@ export class CreatePage {
 
   createPage() {
     if (this.title && this.imageLink && this.url && this.description) {
-      this.http.post<Page>(this.baseUrl + `page`, {
+      this.http.post<Page>(this.baseUrl + `page/`, {
         image: this.imageLink, title: this.title, url: this.url, description: this.description
       }).subscribe((data) => {
         if (data) {
