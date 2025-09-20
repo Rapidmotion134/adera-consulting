@@ -106,7 +106,7 @@
               <td mat-cell *matCellDef="let payment">
                 @if (!payment.isPaid) {
                   <p class="view" [routerLink]="['/', 'payment', 'attach', payment.id]">
-                    View Details
+                    Attach Receipt
                   </p>
                 }
               </td>
@@ -194,7 +194,7 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let payment">
-            <p class="view"> <!--(click)="openDialog(document)"-->
+            <p class="view" (click)="openDialog(payment)">
               View Details
             </p>
           </td>

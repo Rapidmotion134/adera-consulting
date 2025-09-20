@@ -5,7 +5,7 @@ import {NgOptimizedImage} from '@angular/common';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatTableResponsiveModule} from '../mat-table-responsive/mat-table-responsive.module';
 import {MatPaginator} from '@angular/material/paginator';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
@@ -29,7 +29,11 @@ export class PagesComponent implements OnInit {
   displayedColumns: string[] = ['no', 'title', 'link', 'image', 'action'];
   dataSource: MatTableDataSource<Page> = new MatTableDataSource();
 
-  constructor(private dataService: DataService, private http: HttpClient) {}
+  constructor(
+    private dataService: DataService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.dataService.isAdmin$.subscribe((data) => {
@@ -42,6 +46,11 @@ export class PagesComponent implements OnInit {
           this.dataSource = new MatTableDataSource(data);
         }
       })
+  }
+
+  editPage(page: Page) {
+    localStorage.setItem('page', JSON.stringify(page));
+    this.router.navigate(['/', 'pages', 'edit']).then(()=> {return;});
   }
 
   protected readonly window = window;

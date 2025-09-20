@@ -17,8 +17,7 @@ import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
         FormsModule,
         RouterLink,
         MatTableResponsiveModule,
-        MatPaginatorModule,
-        NgIf
+        MatPaginatorModule
     ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.scss'
@@ -31,7 +30,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
   adminDataSource: MatTableDataSource<User> = new MatTableDataSource();
   filteredDataSource: MatTableDataSource<User> = new MatTableDataSource();
-  displayedColumns: string[] = ['id', 'name', 'phone', 'bought', 'regDate', 'actions', /*'more'*/];
+  displayedColumns: string[] = ['id', 'name', 'phone', 'email', 'regDate', 'actions', /*'more'*/];
   displayedAdminColumns: string[] = ['id', 'name', 'phone', 'regDate', 'actions', /*'more'*/];
 
   constructor(private http: HttpClient) { }

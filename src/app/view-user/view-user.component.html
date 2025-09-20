@@ -1,0 +1,107 @@
+<div class="page">
+  <div class="header">
+    <div class="flex">
+      <span class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+        </svg>
+      </span>
+      <p class="title">{{ user.firstName + ' ' + user.lastName | titlecase }}</p>
+    </div>
+    <p class="title">User Details</p>
+  </div>
+  <div class="sections">
+    <p class="title">User Information</p>
+    <div>
+      <p class="description">First Name</p>
+      <p class="value">
+        {{user.firstName | titlecase}}
+        <span class="copy-icon" (click)="clickToCopy(user.firstName)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy"
+               viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+          </svg>
+        </span>
+      </p>
+    </div>
+    <div>
+      <p class="description">Last Name</p>
+      <p class="value">
+        {{user.lastName | titlecase}}
+        <span class="copy-icon" (click)="clickToCopy(user.lastName)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy"
+               viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+          </svg>
+        </span>
+      </p>
+    </div>
+    <div>
+      <p class="description">Phone Number</p>
+      <p class="value">
+        {{user.phone}}
+        <span class="copy-icon" (click)="clickToCopy(user.phone)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy"
+               viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+          </svg>
+        </span>
+      </p>
+    </div>
+    <div>
+      <p class="description">Email</p>
+      <p class="value">
+        {{user.email}}
+        <span class="copy-icon" (click)="clickToCopy(user.email)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy"
+               viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+          </svg>
+        </span>
+      </p>
+    </div>
+    <div>
+      <p class="description">Address</p>
+      <p class="value">
+        {{user.address}}
+        <span class="copy-icon" (click)="clickToCopy(user.address)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy"
+               viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+          </svg>
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="sections">
+    <p class="title">User Information</p>
+    <div>
+      <p class="description">Documents</p>
+      <a [routerLink]="['/', 'documents', userId]" >View Details</a>
+    </div>
+<!--    <div>-->
+<!--      <p class="description">Transactions</p>-->
+<!--      <a>View Details</a>-->
+<!--    </div>-->
+  </div>
+  <div class="sections actions">
+    <p class="title">Action</p>
+    <div>
+      <a [routerLink]="['/', 'document', 'sendTo', userId]">Send Document</a>
+    </div>
+    <div>
+      <a (click)="editUser()">Edit Account</a>
+    </div>
+    <div>
+      <a (click)="changeActivationStatus()">{{user.isActive ? 'Deactivate Account' : 'Activate Account'}}</a>
+    </div>
+    <div>
+      <a (click)="confirmation()">Delete Account</a>
+    </div>
+  </div>
+</div>

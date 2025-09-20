@@ -130,7 +130,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
   }
 
   // openInvoiceDialog(invoice: Invoice) {
-  //   const dialogRef = this.dialog.open(DocumentDialog, {
+  //   const dialogRef = this.dialog.open(PaymentDialog, {
   //     data: {
   //       invoice: invoice,
   //       isDocument: false,
@@ -161,7 +161,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
         document: document,
         isDocument: true,
       },
-      minWidth: '85%'
+      // minWidth: '85%'
     });
 
     dialogRef.afterClosed().subscribe((result: Boolean) => {

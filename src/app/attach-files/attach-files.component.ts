@@ -34,6 +34,7 @@ export class AttachFilesComponent implements OnInit{
   isRequest: boolean = false;
   isDocument: boolean = false;
   isPayment: boolean = false;
+  isUpload: boolean = false;
   userId: any;
   paymentId: any;
   url!: string;
@@ -48,10 +49,14 @@ export class AttachFilesComponent implements OnInit{
     const second = this.route.snapshot.url[1].path;
     if (first === 'payment') {
       this.isPayment = true;
-    } else if ( first === 'document' && second === 'sendTo') {
+      this.paymentId = this.route.snapshot.paramMap.get('paymentId');
+    } else if (first === 'document' && second === 'sendTo') {
       this.isDocument = true;
       this.userId = this.route.snapshot.paramMap.get('userId');
-    } else {
+    } else if (first === 'document' && second === 'upload') {
+      this.isUpload = true;
+    }
+    else {
       this.isRequest = true;
     }
   }
@@ -69,7 +74,7 @@ export class AttachFilesComponent implements OnInit{
 
   sendDocument(){
     if (this.isPayment) {
-      this.http.post<Payment>(this.baseUrl + `payment/${this.paymentId}/`, {
+      this.http.patch<Payment>(this.baseUrl + `payment/${this.paymentId}/`, {
         url: this.url,
       }).subscribe((data) => {
         if (data.isPaid) {
@@ -84,7 +89,16 @@ export class AttachFilesComponent implements OnInit{
           this.success = true;
         }
       })
-    } else {
+    } else if (this.isUpload) {
+      this.http.post<Document>(this.baseUrl + `document/upload/`, {
+        title: this.title, url: this.url, type: this.type
+      }).subscribe((data) => {
+        if (data.url) {
+          this.success = true;
+        }
+      })
+    }
+    else {
       this.http.post<Document>(this.baseUrl + `document/requested/`, {
         title: this.title, type: this.type, url: this.url
       }).subscribe((data) => {

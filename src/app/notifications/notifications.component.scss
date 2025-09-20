@@ -1,0 +1,38 @@
+.notifications {
+  width: 95%;
+  margin: 1rem auto;
+
+  #filter {
+    width: 35%;
+  }
+
+  table {
+    .icon {
+      display: grid;
+      place-items: center;
+      padding: .5rem;
+      border-radius: 100px;
+      aspect-ratio: 1/1;
+      width: fit-content;
+    }
+
+    .expiration {
+      color: #fc1d1d;
+      background-color: #f5e5e5;
+    }
+
+    .order, .document {
+      background-color: #cfffd3;
+    }
+
+    .transaction {
+      background-color: #f5faf5;
+    }
+
+    a, &:visited {
+      text-decoration: none;
+      color: #42b546;
+      cursor: pointer;
+    }
+  }
+}

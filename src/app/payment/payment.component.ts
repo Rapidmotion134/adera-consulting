@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {environment} from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
@@ -8,9 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {DataService} from '../data.service';
 import {DatePipe, NgClass, TitleCasePipe} from '@angular/common';
 import {Payment} from '../interfaces';
+import {MatDialog} from '@angular/material/dialog';
+import {PaymentDialog} from './payment-dialog';
+import {SharedService} from '../shared.service';
 
 @Component({
-    selector: 'app-payment',
+  selector: 'app-payment',
   imports: [
     MatTableModule,
     MatTableResponsiveModule,
@@ -31,9 +34,11 @@ export class PaymentComponent implements OnInit{
   isFirst: boolean = true;
   isAdmin!: boolean;
   payments: MatTableDataSource<Payment> = new MatTableDataSource<Payment>([]);
+  dialog = inject(MatDialog);
 
   constructor(private http: HttpClient,
               private dataService: DataService,
+              private sharedService: SharedService,
               private router: Router) {
   }
 
@@ -59,6 +64,20 @@ export class PaymentComponent implements OnInit{
     if (!this.isFirst) {
       this.state = 1
     }
+  }
+
+  openDialog(payment: Payment) {
+    const dialogRef = this.dialog.open(PaymentDialog, {
+      data: {
+        payment: payment,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result: Boolean) => {
+      if (result) {
+        this.sharedService.getDownloadUrl(payment.url);
+      }
+    });
   }
 
   checkout (payment: Payment) {

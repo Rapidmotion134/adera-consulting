@@ -16,6 +16,7 @@ import {User} from "../interfaces";
   styleUrl: './create-account.component.scss'
 })
 export class CreateAccountComponent implements OnInit {
+
   baseUrl: string = environment.baseUrl;
   firstName!: string;
   lastName!: string;

@@ -52,23 +52,19 @@
     @if (isAdmin) {
       <ng-container>
         <p class="nav" [routerLink]="['dashboard']" (click)="toggleNavbar()">Dashboard</p>
-        <p class="nav" [routerLink]="['orders']" (click)="toggleNavbar()">Orders</p>
         <p class="nav" [routerLink]="['users']" (click)="toggleNavbar()">Users</p>
-        <p class="nav" [routerLink]="['actions']" (click)="toggleNavbar()">Actions</p>
+        <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Payments</p>
         <mat-divider></mat-divider>
         <p class="nav" [routerLink]="['documents']" (click)="toggleNavbar()">Documents</p>
         <p class="nav" [routerLink]="['notifications']" (click)="toggleNavbar()">Notifications</p>
-        <p class="nav" [routerLink]="['financials']" (click)="toggleNavbar()">Financials</p>
         <p class="nav additional" [routerLink]="['/', 'users', 'create']" (click)="toggleNavbar()">Create Account</p>
         <p class="nav additional" (click)="logOut()">Sign Out</p>
       </ng-container>
     } @else {
       <ng-container>
         <p class="nav" [routerLink]="['dashboard']" (click)="toggleNavbar()">Dashboard</p>
-        <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Services</p>
+        <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Payments</p>
         <p class="nav" [routerLink]="['documents']" (click)="toggleNavbar()">Documents</p>
-        <p class="nav" [routerLink]="['invoices']" (click)="toggleNavbar()">Invoices</p>
-        <p class="nav" [routerLink]="['faq']" (click)="toggleNavbar()">FAQ</p>
         <p class="nav" [routerLink]="['notifications']" (click)="toggleNavbar()">Notifications</p>
         <p class="nav additional" (click)="logOut()">Sign Out</p>
       </ng-container>

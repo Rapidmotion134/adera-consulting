@@ -40,14 +40,25 @@
         </svg>
         Back
       </button>
-      <button class="send-button" (click)="createPage()">
-        <span>Finish</span>
-        <span class="icon">
+      @if (!isEdit) {
+        <button class="send-button" (click)="createPage()">
+          <span>Finish</span>
+          <span class="icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>
         </span>
-      </button>
+        </button>
+      } @else {
+        <button class="send-button" (click)="editPage()">
+          <span>Finish</span>
+          <span class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg>
+        </span>
+        </button>
+      }
     </div>
   </div>
 } @else {
@@ -60,8 +71,13 @@
         </svg>
       </span>
     </span>
-      <p class="heading">Document Sent Successfully</p>
-      <p class="extra-text">Document has been sent<br/> successfully</p>
+      @if (!isEdit) {
+        <p class="heading">Page Created Successfully</p>
+        <p class="extra-text">Page has been created<br/> successfully</p>
+      } @else {
+        <p class="heading">Page Edited Successfully</p>
+        <p class="extra-text">Page has been edited<br/> successfully</p>
+      }
       <button class="finish" (click)="done()">Done</button>
     </div>
   </div>

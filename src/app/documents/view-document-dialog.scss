@@ -6,6 +6,7 @@
    .child {
      display: grid;
      place-items: center;
+     justify-items: start;
 
      svg {
        margin-bottom: 1rem;

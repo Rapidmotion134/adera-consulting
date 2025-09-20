@@ -27,12 +27,9 @@ export interface Document {
 export interface Notification {
   id: number;
   title:
-    | 'Expiration Notification'
     | 'Payment Received'
     | 'New User'
-    | 'New Order Received'
-    | 'New Document Received'
-    | 'Document Request';
+    | 'New Document Received';
   description: string;
   isRead: boolean;
   item: number;
@@ -51,6 +48,8 @@ export interface Payment {
   date: Date;
   url: string;
   isPaid: boolean;
+  isAccepted: boolean;
+  isRejected: boolean;
   user: User;
 }
 

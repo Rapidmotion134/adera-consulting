@@ -9,7 +9,7 @@ import {AuthService} from "../auth/auth.service";
 import { HttpClient } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 // import {Document, Notification} from "../interfaces";
-// import {DocumentDialog} from "../company-documents/document-dialog";
+// import {PaymentDialog} from "../company-documents/document-dialog";
 // import {MatDialog} from "@angular/material/dialog";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
@@ -92,14 +92,14 @@ export class NavComponent implements OnInit, AfterViewInit {
   //       .subscribe((data) => {
   //         if (data) {
   //           this.document = data;
-  //           this.dialog.open(DocumentDialog, {
+  //           this.dialog.open(PaymentDialog, {
   //             data: { document: this.document },
   //             minWidth: 700,
   //           });
   //         }
   //       });
   //   } else {
-  //     this.dialog.open(DocumentDialog, {
+  //     this.dialog.open(PaymentDialog, {
   //       data: { document: this.document },
   //       minWidth: 700
   //     });

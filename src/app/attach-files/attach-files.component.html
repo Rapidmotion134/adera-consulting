@@ -62,8 +62,16 @@
         </svg>
       </span>
     </span>
-      <p class="heading">Document Sent Successfully</p>
-      <p class="extra-text">Document has been sent<br/> successfully</p>
+      @if (isDocument || isRequest) {
+        <p class="heading">Document Sent Successfully</p>
+        <p class="extra-text">Document has been sent<br/> successfully</p>
+      } @else if (isUpload) {
+        <p class="heading">Document Uploaded Successfully</p>
+        <p class="extra-text">Document has been uploaded<br/> successfully</p>
+      } @else {
+        <p class="heading">Receipt Attached Successfully</p>
+        <p class="extra-text">Receipt has been attached<br/> successfully</p>
+      }
       <button class="finish" (click)="done()">Done</button>
     </div>
   </div>
