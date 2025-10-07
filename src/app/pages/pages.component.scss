@@ -38,7 +38,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
-    padding: 2rem;
+    padding: 0 2rem 1rem;
+
+    .header {
+      grid-column: 1/-1;
+      margin: .25rem 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
 
     .page {
       display: grid;
@@ -47,7 +54,8 @@
       cursor: pointer;
 
       .thumbnail {
-        background-color: #005e5a;
+        background-color: transparent;
+        //border-bottom: 1px solid #005e5a;
       }
 
       .title {

@@ -14,6 +14,7 @@ export interface Document {
   id: number;
   title: string;
   type: string;
+  category: 'Agreement' | 'Milestone';
   isSent: boolean;
   productId: string;
   isRequested: boolean;
@@ -21,7 +22,6 @@ export interface Document {
   isRead: boolean;
   url: string;
   user: User;
-  // request: Request;
 }
 
 export interface Notification {
@@ -59,4 +59,5 @@ export interface Page {
   url: string;
   description: string;
   image: string;
+  category: 'Service Request' | 'Appointment Request' | 'Support Request';
 }

@@ -20,11 +20,18 @@
         <div class="grid">
           <div class="child">
             <p>Document Title</p>
-            <input type="text" [(ngModel)]="title" name="title" class="title-input" placeholder="Enter Document Title" required>
+            <input type="text" [(ngModel)]="title" name="title" class="input" placeholder="Enter Document Title" required>
           </div>
           <div class="child">
             <p>Document Type</p>
-            <input type="text" [(ngModel)]="type" name="type" class="title-input" placeholder="Enter Document Type" required>
+            <input type="text" [(ngModel)]="type" name="type" class="input" placeholder="Enter Document Type" required>
+          </div>
+          <div class="child">
+            <p>Category</p>
+            <select class="input" [id]="category" [(ngModel)]="category" >
+              <option value="Agreement" selected>{{ 'Agreement' }}</option>
+              <option value="Milestone">{{ 'Milestone' }}</option>
+            </select>
           </div>
         </div>
       }

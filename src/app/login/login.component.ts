@@ -6,12 +6,13 @@ import * as jose from 'jose';
 import {Subscription} from "rxjs";
 import {DataService} from "../data.service";
 import {NgOptimizedImage} from '@angular/common';
+import {environment} from '../../environments/environment';
 
 @Component({
-    selector: 'app-login',
+  selector: 'app-login',
   imports: [FormsModule, NgOptimizedImage],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
 
 export class LoginComponent implements OnInit, OnDestroy{
@@ -19,8 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy{
   password!: string;
   subscription!: Subscription;
   error: boolean = false;
-  // isHidden: boolean = true;
   type: "password" | "text" = "password";
+  googleUrl: string = environment.baseUrl + "auth/google";
 
   constructor(private authService: AuthService,
               private router: Router,

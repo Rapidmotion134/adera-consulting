@@ -26,7 +26,7 @@ export class PagesComponent implements OnInit {
   baseUrl: string = environment.baseUrl;
   isAdmin!: boolean;
   pages!: Page[];
-  displayedColumns: string[] = ['no', 'title', 'link', 'image', 'action'];
+  displayedColumns: string[] = ['no', 'title', 'link', 'image', 'category', 'action'];
   dataSource: MatTableDataSource<Page> = new MatTableDataSource();
 
   constructor(

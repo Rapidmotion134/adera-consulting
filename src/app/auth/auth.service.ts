@@ -82,4 +82,8 @@ export class AuthService {
       return true;
     }
   }
+
+  setLoginStatus(status: boolean) {
+    this._isLoggedIn$.next(status);
+  }
 }

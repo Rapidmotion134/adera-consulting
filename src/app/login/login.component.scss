@@ -13,6 +13,21 @@
   margin: 2rem auto;
 }
 
+.google {
+  border: 1px solid #e1e3e5;
+  border-radius: 15px;
+  width: fit-content;
+  margin: .25rem auto;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  background-color: #005e5a;
+  cursor: pointer;
+
+  &:hover {
+  }
+}
+
 svg {
   fill: white;
 }

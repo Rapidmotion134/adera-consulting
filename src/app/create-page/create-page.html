@@ -21,6 +21,14 @@
           <p>Link</p>
           <input type="text" [(ngModel)]="url" name="link" class="input" placeholder="Enter Page Link" required>
         </div>
+        <div class="child">
+          <p>Category</p>
+          <select class="input" [id]="category" [(ngModel)]="category" >
+            <option value="Service Request">{{ 'Service Request' }}</option>
+            <option value="Appointment Request">{{ 'Appointment Request' }}</option>
+            <option value="Support request">{{ 'Support request' }}</option>
+          </select>
+        </div>
       </div>
       <div class="description">
         <p>Description</p>

@@ -20,7 +20,7 @@ import {ViewUserComponent} from './view-user/view-user.component';
 
 export const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   { path: 'users', pathMatch: 'full', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'users/view/:userId', pathMatch: 'full', component: ViewUserComponent, canActivate: [AuthGuard] },
   { path: 'users/create', pathMatch: 'full', component: CreateAccountComponent, canActivate: [AuthGuard] },
@@ -39,9 +39,9 @@ export const routes: Routes = [
   { path: 'payment/sendTo/:userId', pathMatch: 'full', component: GeneratePaymentComponent, canActivate: [AuthGuard] },
   { path: 'payment/attach/:paymentId', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
   // { path: 'checkout/:paymentId', pathMatch: 'full', component: CheckoutComponent, canActivate: [AuthGuard] },
-  { path: 'pages', pathMatch: 'full', component: PagesComponent, canActivate: [AuthGuard] },
-  { path: 'pages/create', pathMatch: 'full', component: CreatePage, canActivate: [AuthGuard] },
-  { path: 'pages/edit', pathMatch: 'full', component: CreatePage, canActivate: [AuthGuard] },
+  { path: 'requests', pathMatch: 'full', component: PagesComponent, canActivate: [AuthGuard] },
+  { path: 'requests/create', pathMatch: 'full', component: CreatePage, canActivate: [AuthGuard] },
+  { path: 'requests/edit', pathMatch: 'full', component: CreatePage, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
 ];

@@ -31,6 +31,7 @@ export class AttachFilesComponent implements OnInit{
   baseUrl: string = environment.baseUrl;
   title!: string;
   type!: string;
+  category: 'Agreement' | 'Milestone' = "Agreement";
   isRequest: boolean = false;
   isDocument: boolean = false;
   isPayment: boolean = false;
@@ -83,7 +84,7 @@ export class AttachFilesComponent implements OnInit{
       })
     } else if (this.isDocument) {
       this.http.post<Document>(this.baseUrl + `document/user/${this.userId}/`, {
-        title: this.title, url: this.url, type: this.type
+        title: this.title, url: this.url, type: this.type, category: this.category
       }).subscribe((data) => {
         if (data.url) {
           this.success = true;

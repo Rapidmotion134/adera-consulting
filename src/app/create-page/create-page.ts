@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {environment} from '../../environments/environment';
 import {Location} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
-import {Page, User} from '../interfaces';
+import {Page} from '../interfaces';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -24,6 +24,7 @@ export class CreatePage implements OnInit {
   imageLink!: string;
   description!: string;
   url!: string;
+  category: 'Service Request' | 'Appointment Request' | 'Support Request' = "Service Request";
   isEdit!: boolean;
   success: boolean = false;
 
@@ -62,7 +63,8 @@ export class CreatePage implements OnInit {
   createPage() {
     if (this.title && this.imageLink && this.url && this.description) {
       this.http.post<Page>(this.baseUrl + `page/`, {
-        image: this.imageLink, title: this.title, url: this.url, description: this.description
+        image: this.imageLink, title: this.title, url: this.url,
+        description: this.description, category: this.category
       }).subscribe((data) => {
         if (data) {
           this.success = true;

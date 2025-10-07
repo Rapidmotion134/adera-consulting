@@ -51,6 +51,7 @@ export class NotificationsComponent implements OnInit, AfterViewInit {
             return 0;
           });
           this.dataSource.data = data;
+          this.filteredDataSource.data = this.dataSource.data;
         }
       })
   }
