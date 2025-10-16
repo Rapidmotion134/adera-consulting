@@ -1,0 +1,54 @@
+.welcome {
+  display: grid;
+  place-items: center;
+  margin: 0 auto ;
+
+  .container {
+    text-align: center;
+    display: grid;
+    place-items: center;
+    padding: 2rem 2rem 0;
+    border-radius: 10px;
+
+    .icon-container {
+      display: grid;
+      place-items: center;
+      background-color: #e2f1eb;
+      border-radius: 90px;
+      padding: .5rem;
+      width: fit-content;
+
+      .icon {
+        display: grid;
+        place-items: center;
+        background-color: #22a16c;
+        color: white;
+        border-radius: 80px;
+        padding: .5rem;
+      }
+    }
+
+    .heading {
+      font-size: 23px;
+      margin: .5rem 0 .4rem;
+    }
+
+    .extra-text {
+      color: #737272;
+      font-size: 14px;
+      margin-bottom: 1rem;
+    }
+
+    .finish {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .75rem 6rem;
+      background-color: #005e5a;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}

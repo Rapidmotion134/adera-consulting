@@ -1,4 +1,8 @@
 <div class="dashboard">
+  @if (!isAdmin) {
+    <img ngSrc="../../assets/bg.png" alt="" width="1920" height="280">
+    <h1>Welcome to Adera</h1>
+  }
   <div class="container">
     <div class="card" [routerLink]="['/', 'documents']">
       <span class="icons-container">
