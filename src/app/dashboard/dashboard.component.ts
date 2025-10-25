@@ -53,6 +53,9 @@ export class DashboardComponent implements OnInit {
         this.authService.setLoginStatus(true);
         const decoded = jose.decodeJwt(token);
         if (decoded.sub) {
+          if (!decoded['registered']){
+            this.isNew = true;
+          }
 					this.userId = <string>decoded["userId"];
           localStorage.setItem('userId', this.userId);
           localStorage.setItem('username', <string>decoded.sub);
@@ -67,6 +70,8 @@ export class DashboardComponent implements OnInit {
     if (this.isNew) {
       this.openDialog();
 			this.isAdmin = false;
+    } else {
+      this.router.navigate(['/dashboard'], {replaceUrl: true}).then(() => { });
     }
   }
 

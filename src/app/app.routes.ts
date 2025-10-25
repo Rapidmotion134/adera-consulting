@@ -14,9 +14,6 @@ import {CreateAccountComponent} from "./create-account/create-account.component"
 import {NotificationsComponent} from "./notifications/notifications.component";
 import {ViewUserComponent} from './view-user/view-user.component';
 import { RegistrationComponent } from './registration/registration.component';
-// import {OrdersComponent} from "./orders/orders.component";
-// import {ViewOrderComponent} from "./view-order/view-order.component";
-// import {RequestDocumentComponent} from "./request-document/request-document.component";
 
 export const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
