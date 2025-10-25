@@ -10,6 +10,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {Document, Payment} from '../interfaces';
+import { DataService } from '../data.service';
 
 @Component({
     selector: 'app-attach-files',
@@ -32,6 +33,7 @@ export class AttachFilesComponent implements OnInit{
   title!: string;
   type!: string;
   category: 'Agreement' | 'Milestone' = "Agreement";
+	isAdmin!: boolean;
   isRequest: boolean = false;
   isDocument: boolean = false;
   isPayment: boolean = false;
@@ -41,11 +43,16 @@ export class AttachFilesComponent implements OnInit{
   url!: string;
   success: boolean = false;
 
-  constructor(private location: Location,
-              private route: ActivatedRoute,
-              private http: HttpClient) { }
+  constructor(
+		private dataService: DataService,
+		private location: Location,
+    private route: ActivatedRoute,
+    private http: HttpClient) { }
 
   ngOnInit() {
+		this.dataService.isAdmin$.subscribe(data => {
+      this.isAdmin = data;
+    });
     const first = this.route.snapshot.url[0].path;
     const second = this.route.snapshot.url[1].path;
     if (first === 'payment') {

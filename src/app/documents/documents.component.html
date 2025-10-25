@@ -12,35 +12,38 @@
       </div>
     </div>
   }
-  <div class="flex">
-    <p class="title">Documents</p>
-  </div>
-  <div class="filters">
-    <select name="filters" id="filter" [(ngModel)]="filter" (ngModelChange)="onFilter()">
-      <option value="all">All</option>
-      <option value="sent">Sent</option>
-      <option value="received">Received</option>
-    </select>
-    @if (isAdmin) {
-      <div class="input">
-        <input class="field" [(ngModel)]="search" placeholder="Search By Username" name="search" (ngModelChange)="onInputChange()"/>
-        <span class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-          </svg>
-        </span>
-      </div>
-    } @else {
-      <div class="input">
-        <input class="field" [(ngModel)]="search" placeholder="Search By Type" name="search" (ngModelChange)="onUserInputChange()"/>
-        <span class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-          </svg>
-        </span>
-      </div>
-    }
-  </div>
+	@if (state !== 0 && !isAdmin) {
+		<div class="flex">
+			<p class="title">{{ state === 1 ? 'Agreements' : 'Milestones' }}</p>
+		</div>
+		@if (isAdmin) {
+			<div class="filters">
+					<select name="filters" id="filter" [(ngModel)]="filter" (ngModelChange)="onFilter()">
+						<option value="all">All</option>
+						<option value="sent">Sent</option>
+						<option value="received">Received</option>
+					</select>
+					<div class="input">
+						<input class="field" [(ngModel)]="search" placeholder="Search By Username" name="search" (ngModelChange)="onInputChange()"/>
+						<span class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+							</svg>
+						</span>
+					</div>
+				<!-- } @else {
+					<div class="input">
+						<input class="field" [(ngModel)]="search" placeholder="Search By Type" name="search" (ngModelChange)="onUserInputChange()"/>
+						<span class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+							</svg>
+						</span>
+					</div>
+				} -->
+			</div>
+		}
+	}
   @if (isAdmin) {
     <ng-container>
       <table mat-table matTableResponsive [dataSource]="filteredDataSource" class="mat-elevation-z8">
@@ -95,174 +98,137 @@
                      showFirstLastButtons="true">
       </mat-paginator>
     </ng-container>
-    <!--<ng-container>
-      <div class="flex">
-        <div class="icon-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
-            <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27m.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0z"/>
-            <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
-          </svg>
-        </div>
-        <p class="title">Invoices</p>
-      </div>
-
-      <table mat-table matTableResponsive [dataSource]="invoices" class="mat-elevation-z8">
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID</th>
-          <td mat-cell *matCellDef="let invoice">{{invoice.id}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="user">
-          <th mat-header-cell *matHeaderCellDef>User</th>
-          <td mat-cell *matCellDef="let invoice"> {{invoice.user.firstName + " " + invoice.user.lastName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef> Title</th>
-          <td mat-cell *matCellDef="let invoice"> {{invoice.title}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Date</th>
-          <td mat-cell *matCellDef="let invoice">{{invoice.date}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let invoice">
-            <p class="view" (click)="openInvoiceDialog(invoice)">
-              View
-            </p>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="invoiceColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: invoiceColumns;"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[20]"
-                     #inv
-                     showFirstLastButtons="true">
-      </mat-paginator>
-
-    </ng-container>-->
   } @else {
-    <ng-container >
+		@if (state === 0) {
+			<div class="container">
+				<div class="option" (click)="state = 1">Agreements</div>
+				<div class="option" (click)="state = 2">Milestones</div>
+			</div>
+		} @else if (state === 1) {
+			<ng-container >
+				<table mat-table matTableResponsive [dataSource]="agreements" class="mat-elevation-z8">
+					<ng-container matColumnDef="no">
+						<th mat-header-cell *matHeaderCellDef> No. </th>
+						<td mat-cell *matCellDef="let document; index as i">{{ i + 1 }}</td>
+					</ng-container>
+	
+					<ng-container matColumnDef="title">
+						<th mat-header-cell *matHeaderCellDef> Title </th>
+						<td mat-cell *matCellDef="let document"> {{document.title}} </td>
+					</ng-container>
+	
+					<ng-container matColumnDef="type">
+						<th mat-header-cell *matHeaderCellDef> Type </th>
+						<td mat-cell *matCellDef="let document"> {{document.type ? document.type : '-'}} </td>
+					</ng-container>
+	
+					<ng-container matColumnDef="id">
+						<th mat-header-cell *matHeaderCellDef> ID </th>
+						<td mat-cell *matCellDef="let document">{{document.productId}}</td>
+					</ng-container>
+	
+					<ng-container matColumnDef="date">
+						<th mat-header-cell *matHeaderCellDef> Date </th>
+						<td mat-cell *matCellDef="let document"> {{ document.date | date }} </td>
+					</ng-container>
+	
+					<ng-container matColumnDef="status">
+						<th mat-header-cell *matHeaderCellDef> Status </th>
+						<td mat-cell *matCellDef="let document">
+							<p class="status" [ngClass]="{'read': document.isRead, 'unread': !document.isRead}">
+								{{ document.isRead ? "Read" : "Unread" }}
+							</p>
+						</td>
+					</ng-container>
+	
+					<ng-container matColumnDef="actions">
+						<th mat-header-cell *matHeaderCellDef> </th>
+						<td mat-cell *matCellDef="let document">
+							<p class="view" (click)="download(document)">
+								Download
+							</p>
+						</td>
+					</ng-container>
+	
+					<tr mat-header-row *matHeaderRowDef="userDisplayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: userDisplayedColumns;"></tr>
+				</table>
+				<mat-paginator [pageSizeOptions]="[20]"
+											 #userDoc
+											 showFirstLastButtons="true">
+				</mat-paginator>
+			</ng-container>
+			<div class="back-button-container">
+				<button class="back-button" (click)="state = 0">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+					</svg>
+					Back
+				</button>
+			</div>
+		} @else {
+			<ng-container >
+				<table mat-table matTableResponsive
+							[dataSource]="milestones" class="mat-elevation-z8">
+					<ng-container matColumnDef="no">
+						<th mat-header-cell *matHeaderCellDef> No. </th>
+						<td mat-cell *matCellDef="let document; index as i">{{ i + 1 }}</td>
+					</ng-container>
 
-      <table mat-table matTableResponsive
-             [dataSource]="filteredDataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="no">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let document; index as i">{{ i + 1 }}</td>
-        </ng-container>
+					<ng-container matColumnDef="title">
+						<th mat-header-cell *matHeaderCellDef> Title </th>
+						<td mat-cell *matCellDef="let document"> {{document.title}} </td>
+					</ng-container>
 
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef> Title </th>
-          <td mat-cell *matCellDef="let document"> {{document.title}} </td>
-        </ng-container>
+					<ng-container matColumnDef="type">
+						<th mat-header-cell *matHeaderCellDef> Type </th>
+						<td mat-cell *matCellDef="let document"> {{document.type ? document.type : '-'}} </td>
+					</ng-container>
 
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef> Type </th>
-          <td mat-cell *matCellDef="let document"> {{document.type ? document.type : '-'}} </td>
-        </ng-container>
+					<ng-container matColumnDef="id">
+						<th mat-header-cell *matHeaderCellDef> ID </th>
+						<td mat-cell *matCellDef="let document">{{document.productId}}</td>
+					</ng-container>
 
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let document">{{document.productId}}</td>
-        </ng-container>
+					<ng-container matColumnDef="date">
+						<th mat-header-cell *matHeaderCellDef> Date </th>
+						<td mat-cell *matCellDef="let document"> {{ document.date | date }} </td>
+					</ng-container>
 
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Date </th>
-          <td mat-cell *matCellDef="let document"> {{ document.date | date }} </td>
-        </ng-container>
+					<ng-container matColumnDef="status">
+						<th mat-header-cell *matHeaderCellDef> Status </th>
+						<td mat-cell *matCellDef="let document">
+							<p class="status" [ngClass]="{'read': document.isRead, 'unread': !document.isRead}">
+								{{ document.isRead ? "Read" : "Unread" }}
+							</p>
+						</td>
+					</ng-container>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let document">
-            <p class="status" [ngClass]="{'read': document.isRead, 'unread': !document.isRead}">
-              {{ document.isRead ? "Read" : "Unread" }}
-            </p>
-          </td>
-        </ng-container>
+					<ng-container matColumnDef="actions">
+						<th mat-header-cell *matHeaderCellDef> </th>
+						<td mat-cell *matCellDef="let document">
+							<p class="view" (click)="download(document)">
+								Download
+							</p>
+						</td>
+					</ng-container>
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let document">
-            <p class="view" (click)="download(document)">
-              Download
-            </p>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="userDisplayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: userDisplayedColumns;"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[20]"
-                     #userDoc
-                     showFirstLastButtons="true">
-      </mat-paginator>
-    </ng-container>
-
-    <!--<ng-container>
-      <div class="flex">
-        <div class="icon-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder2-open" viewBox="0 0 16 16">
-            <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7z"/>
-          </svg>
-        </div>
-        <p class="title">Requests</p>
-      </div>
-      <table mat-table [dataSource]="requests" class="mat-elevation-z8">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let i = index">{{ i + 1 }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef> Title </th>
-          <td mat-cell *matCellDef="let request"> {{request.title}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="subject">
-          <th mat-header-cell *matHeaderCellDef> Subject </th>
-          <td mat-cell *matCellDef="let request"> {{request["subject"]}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Date </th>
-          <td mat-cell *matCellDef="let request"> {{ request["date"] | date }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let request">
-            <p class="status" [ngClass]="{'read': request['isDone'] === true, 'unread': request['isDone'] === false}">
-              {{request["isDone"] ? 'Done' : 'Pending'}}
-            </p>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let request">
-            @if (!request['isDone']) {
-              <ng-container>
-                <p class="view" [routerLink]="['/', 'document', 'request']">
-                  Attach
-                </p>
-              </ng-container>
-            }
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="requestColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: requestColumns;"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[20]"
-                     #userInv
-                     showFirstLastButtons="true"
-                     aria-label="Select page of periodic elements">
-      </mat-paginator>
-    </ng-container>-->
+					<tr mat-header-row *matHeaderRowDef="userDisplayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: userDisplayedColumns;"></tr>
+				</table>
+				<mat-paginator [pageSizeOptions]="[20]"
+											#userDoc
+											showFirstLastButtons="true">
+				</mat-paginator>
+			</ng-container>
+			<div class="back-button-container">
+				<button class="back-button" (click)="state = 0">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+					</svg>
+					Back
+				</button>
+			</div>
+		}
   }
 </div>

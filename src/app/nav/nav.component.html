@@ -58,6 +58,8 @@
         <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Payments</p>
         <mat-divider></mat-divider>
         <p class="nav" [routerLink]="['documents']" (click)="toggleNavbar()">Documents</p>
+				<p class="nav" [routerLink]="['document', 'select']" (click)="toggleNavbar()">Send Document</p>
+				<p class="nav" [routerLink]="['requests']" (click)="toggleNavbar()">Requests</p>
         <p class="nav" [routerLink]="['notifications']" (click)="toggleNavbar()">Notifications</p>
         <p class="nav additional" [routerLink]="['/', 'users', 'create']" (click)="toggleNavbar()">Create Account</p>
         <p class="nav additional" (click)="logOut()">Sign Out</p>
@@ -67,6 +69,8 @@
         <p class="nav" [routerLink]="['dashboard']" (click)="toggleNavbar()">Dashboard</p>
         <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Payments</p>
         <p class="nav" [routerLink]="['documents']" (click)="toggleNavbar()">Documents</p>
+				<p class="nav" [routerLink]="['document', 'request' ]" (click)="toggleNavbar()">Send Document</p>
+				<p class="nav" [routerLink]="['requests']" (click)="toggleNavbar()">Requests</p>
         <p class="nav" [routerLink]="['notifications']" (click)="toggleNavbar()">Notifications</p>
         <p class="nav additional" (click)="logOut()">Sign Out</p>
       </ng-container>

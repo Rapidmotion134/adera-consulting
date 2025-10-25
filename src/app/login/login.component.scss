@@ -105,6 +105,18 @@ button.icon {
   }
 }
 
+.sign-up {
+	text-decoration: none;
+	color: black;
+	opacity: .75;
+	text-align: center;
+	transition: opacity 200ms ease-in;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
 .submit {
   background-color: #005e5a;
   color: white;

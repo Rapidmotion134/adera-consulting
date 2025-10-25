@@ -7,13 +7,13 @@ import {SelectUserComponent} from './select-user/select-user.component';
 import {UsersComponent} from './users/users.component';
 import {AttachFilesComponent} from './attach-files/attach-files.component';
 import {PaymentComponent} from './payment/payment.component';
-import {CheckoutComponent} from './checkout/checkout.component';
 import {PagesComponent} from './pages/pages.component';
 import {GeneratePaymentComponent} from './payment-request/generate-payment.component';
 import {CreatePage} from './create-page/create-page';
 import {CreateAccountComponent} from "./create-account/create-account.component";
 import {NotificationsComponent} from "./notifications/notifications.component";
 import {ViewUserComponent} from './view-user/view-user.component';
+import { RegistrationComponent } from './registration/registration.component';
 // import {OrdersComponent} from "./orders/orders.component";
 // import {ViewOrderComponent} from "./view-order/view-order.component";
 // import {RequestDocumentComponent} from "./request-document/request-document.component";
@@ -21,6 +21,7 @@ import {ViewUserComponent} from './view-user/view-user.component';
 export const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
+  { path: 'registration', pathMatch: 'full', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: 'users', pathMatch: 'full', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'users/view/:userId', pathMatch: 'full', component: ViewUserComponent, canActivate: [AuthGuard] },
   { path: 'users/create', pathMatch: 'full', component: CreateAccountComponent, canActivate: [AuthGuard] },

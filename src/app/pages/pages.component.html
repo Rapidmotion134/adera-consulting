@@ -61,54 +61,82 @@
     </ng-container>
   } @else {
     <div class="pages-container">
-      <p class="header">Service Request</p>
-      @for (page of pages; track page.id) {
-        @if (page.category === 'Service Request') {
-          <div class="page" (click)="window.open(`https://${page.url}`, '_blank', 'noopener,noreferrer')">
-            <div class="thumbnail">
-              <img [ngSrc]="baseUrl + 'uploads/' + page.image" width="100" height="80" alt="thumbnail">
-            </div>
-            <div>
-              <p class="title">{{page.title}}</p>
-              <p class="text">
-                {{ page.description }}
-              </p>
-            </div>
-          </div>
-        }
-      }
-      <p class="header">Appointment Request</p>
-      @for (page of pages; track page.id) {
-        @if (page.category === 'Appointment Request') {
-          <div class="page" (click)="window.open(`https://${page.url}`, '_blank', 'noopener,noreferrer')">
-            <div class="thumbnail">
-              <img [ngSrc]="baseUrl + 'uploads/' + page.image" width="100" height="80" alt="thumbnail">
-            </div>
-            <div>
-              <p class="title">{{page.title}}</p>
-              <p class="text">
-                {{ page.description }}
-              </p>
-            </div>
-          </div>
-        }
-      }
-      <p class="header">Support Request</p>
-      @for (page of pages; track page.id) {
-        @if (page.category === 'Support Request') {
-          <div class="page" (click)="window.open(`https://${page.url}`, '_blank', 'noopener,noreferrer')">
-            <div class="thumbnail">
-              <img [ngSrc]="baseUrl + 'uploads/' + page.image" width="100" height="80" alt="thumbnail">
-            </div>
-            <div>
-              <p class="title">{{page.title}}</p>
-              <p class="text">
-                {{ page.description }}
-              </p>
-            </div>
-          </div>
-        }
-      }
-    </div>
-  }
+			@if (state === 0) {
+				<div class="container">
+					<div class="option" (click)="state = 1">Service Request</div>
+					<div class="option" (click)="state = 2">Appointment Request</div>
+					<div class="option" (click)="state = 3">Support Request</div>
+				</div>
+			} @else if (state === 1) {
+				<p class="header">Service Request</p>
+				@for (page of services; track page.id) {
+					<div class="page" (click)="window.open(`https://${page.url}`, '_blank', 'noopener,noreferrer')">
+						<div class="thumbnail">
+							<img [ngSrc]="baseUrl + 'uploads/' + page.image" width="100" height="80" alt="thumbnail">
+						</div>
+						<div>
+							<p class="title">{{page.title}}</p>
+							<p class="text">
+								{{ page.description }}
+							</p>
+						</div>
+					</div>
+				} 
+				<div class="back-button-container">
+					<button class="back-button" (click)="state = 0">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+						</svg>
+						Back
+					</button>
+				</div>
+			} @else if (state === 2) {
+				<p class="header">Appointment Request</p>
+				@for (page of appointments; track page.id) {
+					<div class="page" (click)="window.open(`https://${page.url}`, '_blank', 'noopener,noreferrer')">
+						<div class="thumbnail">
+							<img [ngSrc]="baseUrl + 'uploads/' + page.image" width="100" height="80" alt="thumbnail">
+						</div>
+						<div>
+							<p class="title">{{page.title}}</p>
+							<p class="text">
+								{{ page.description }}
+							</p>
+						</div>
+					</div>
+				}
+				<div class="back-button-container">
+					<button class="back-button" (click)="state = 0">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+						</svg>
+						Back
+					</button>
+				</div>
+			} @else if (state === 3) {
+				<p class="header">Support Request</p>
+				@for (page of supports; track page.id) {
+					<div class="page" (click)="window.open(`https://${page.url}`, '_blank', 'noopener,noreferrer')">
+						<div class="thumbnail">
+							<img [ngSrc]="baseUrl + 'uploads/' + page.image" width="100" height="80" alt="thumbnail">
+						</div>
+						<div>
+							<p class="title">{{page.title}}</p>
+							<p class="text">
+								{{ page.description }}
+							</p>
+						</div>
+					</div>
+				}
+				<div class="back-button-container">
+					<button class="back-button" (click)="state = 0">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+						</svg>
+						Back
+					</button>
+				</div>
+			}    
+		</div>
+	}
 </div>

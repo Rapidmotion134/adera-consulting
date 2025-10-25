@@ -5,7 +5,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {DataService} from "../data.service";
 import {MatMenuModule} from "@angular/material/menu";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-responsive.module";
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -35,17 +35,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(private dataService: DataService,
               private route: ActivatedRoute,
-              private authService: AuthService) { }
+              private authService: AuthService,
+							private router: Router) { }
 
   baseUrl: string = environment.baseUrl;
   isAdmin!: boolean;
   isNew!: boolean;
   readonly dialog = inject(MatDialog);
+	userId!: string;
 
   ngOnInit(): void {
-    this.dataService.isAdmin$.subscribe(data => {
-      this.isAdmin = data;
-    });
     this.route.queryParams.subscribe((params) => {
       const token: string = params['token'];
       this.isNew = params['new'];
@@ -54,17 +53,29 @@ export class DashboardComponent implements OnInit {
         this.authService.setLoginStatus(true);
         const decoded = jose.decodeJwt(token);
         if (decoded.sub) {
-          localStorage.setItem('userId', <string>decoded["userId"]);
+					this.userId = <string>decoded["userId"];
+          localStorage.setItem('userId', this.userId);
           localStorage.setItem('username', <string>decoded.sub);
-          localStorage.setItem('isSuper', 'false');
+          localStorage.setItem('isSuper', <string>decoded['isSuperAdmin']);
           this.dataService.setIsAdmin(<boolean>decoded['isAdmin']);
         }
       }
     });
+		this.dataService.isAdmin$.subscribe(data => {
+      this.isAdmin = data;
+    });
     if (this.isNew) {
-      this.dialog.open(WelcomeDialogComponent);
+      this.openDialog();
+			this.isAdmin = false;
     }
   }
+
+  openDialog() {
+		const dialogRef = this.dialog.open(WelcomeDialogComponent);
+		dialogRef.afterClosed().subscribe(() => {
+			this.router.navigate(['/', 'registration']).then(()=> {return;});
+		});
+	}
 }
 
 @Component({

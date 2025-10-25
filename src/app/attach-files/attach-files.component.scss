@@ -176,6 +176,9 @@
     }
 
     .buttons {
+			flex-direction: column;
+			align-items: center;
+
       .back-button {
         width: 80% !important;
       }

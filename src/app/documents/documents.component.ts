@@ -33,6 +33,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
   baseUrl: string = environment.baseUrl;
   filter: string = 'all';
   search: any;
+	state: 0 | 1 | 2 = 0;
   isAdmin!: boolean;
 
   displayedColumns: string[] = ['no', 'title', 'type', 'id', 'date', 'status', 'actions'];
@@ -41,6 +42,9 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
   // invoiceColumns: string[] = ['id', 'user', 'title', 'date', 'actions'];
   dataSource: MatTableDataSource<Document> = new MatTableDataSource();
   filteredDataSource: MatTableDataSource<Document> = new MatTableDataSource();
+	agreements: Document[] = [];
+	milestones: Document[] = [];
+
   dialog = inject(MatDialog);
   // requests: MatTableDataSource<Request> = new MatTableDataSource();
   // invoices: MatTableDataSource<Invoice> = new MatTableDataSource();
@@ -65,17 +69,6 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
               this.filteredDataSource.data = data;
             }
           });
-        /*this.http.get<Invoice[]>(this.baseUrl + `invoice`)
-          .subscribe((data) => {
-              if (data.length) {
-                data.sort((a, b) => {
-                  if (a.date > b.date) return -1;
-                  if (a.date < b.date) return 1;
-                  return 0;
-                });
-                this.invoices.data = data;
-              }
-          })*/
       } else {
         this.http.get<Document[]>(this.baseUrl + `document/user/${userId}`)
           .subscribe((data) => {
@@ -84,66 +77,34 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
               this.filteredDataSource.data = data;
             }
           });
-        /*this.http.get<Invoice[]>(this.baseUrl + `invoice/user/${userId}`)
-          .subscribe((data) => {
-            if (data.length) {
-              data.sort((a, b) => {
-                if (a.date > b.date) return -1;
-                if (a.date < b.date) return 1;
-                return 0;
-              });
-              this.invoices.data = data;
-            }
-          })*/
       }
     } else {
       const userId = localStorage.getItem('userId');
       this.http.get<Document[]>(this.baseUrl + `document/user/${userId}`)
         .subscribe((data) => {
           if (data.length) {
-            this.dataSource.data = data;
-            this.filteredDataSource.data = data;
+            data.forEach((document) => {
+							if (document.category === 'Agreement') {
+								this.agreements.push(document);
+							} else {
+								this.milestones.push(document);
+							}
+						})
           }
         });
-      /*this.http.get<Request[]>(this.baseUrl + `request/user/${userId}`)
-        .subscribe((data) => {
-          if (data.length) {
-            this.requests.data = data;
-          }
-        })*/
     }
   }
 
-  // @ViewChild('inv') invoicePaginator!: MatPaginator;
   @ViewChild('doc') documentPaginator!: MatPaginator;
-  // @ViewChild('userInv') userInvoicePaginator!: MatPaginator;
   @ViewChild('userDoc') userDocumentPaginator!: MatPaginator;
 
   ngAfterViewInit() {
     if (this.isAdmin) {
-      // this.invoices.paginator = this.invoicePaginator;
       this.filteredDataSource.paginator = this.documentPaginator;
     } else {
-      // this.invoices.paginator = this.userInvoicePaginator;
       this.filteredDataSource.paginator = this.userDocumentPaginator;
     }
   }
-
-  // openInvoiceDialog(invoice: Invoice) {
-  //   const dialogRef = this.dialog.open(PaymentDialog, {
-  //     data: {
-  //       invoice: invoice,
-  //       isDocument: false,
-  //     },
-  //     minWidth: '85%'
-  //   });
-  //
-  //   dialogRef.afterClosed().subscribe((result: Boolean) => {
-  //     if (result) {
-  //       this.sharedService.getDownloadUrl(invoice.url);
-  //     }
-  //   });
-  // }
 
   download(document: Document) {
     this.sharedService.getDownloadUrl(document.url);
@@ -161,7 +122,6 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
         document: document,
         isDocument: true,
       },
-      // minWidth: '85%'
     });
 
     dialogRef.afterClosed().subscribe((result: Boolean) => {

@@ -26,13 +26,15 @@
             <p>Document Type</p>
             <input type="text" [(ngModel)]="type" name="type" class="input" placeholder="Enter Document Type" required>
           </div>
-          <div class="child">
-            <p>Category</p>
-            <select class="input" [id]="category" [(ngModel)]="category" >
-              <option value="Agreement" selected>{{ 'Agreement' }}</option>
-              <option value="Milestone">{{ 'Milestone' }}</option>
-            </select>
-          </div>
+					@if (isAdmin) {
+						<div class="child">
+							<p>Category</p>
+							<select class="input" [id]="category" [(ngModel)]="category" >
+								<option value="Agreement" selected>{{ 'Agreement' }}</option>
+								<option value="Milestone">{{ 'Milestone' }}</option>
+							</select>
+						</div>
+					}
         </div>
       }
       <div class="upload">

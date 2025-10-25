@@ -1,0 +1,162 @@
+.registration {
+	width: 95%;
+	margin: 1.5rem auto;
+  
+	.title {
+	  font-size: 22px;
+	  font-weight: 600;
+	  margin: 0;
+	}
+  
+	.page-title {
+	  border: 1px solid #e1e3e5;
+	  border-top: none;
+	  background-color: white;
+	  padding: 1rem 2rem;
+	}
+  
+	.header {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  padding: 1rem 1rem 1rem 1.5rem;
+	  border: 1px solid #e1e3e5;
+  
+	  .icon {
+		background-color: white;
+		color: #005e5a;
+		padding: .5rem;
+		display: grid;
+		place-items: center;
+		border-radius: 5px;
+	  }
+  
+	  .flex {
+		display: flex;
+		gap: 1rem;
+	  }
+	}
+  
+	.section {
+	  background-color: white;
+	  padding: 1rem;
+	  border: 1px solid #e1e3e5;
+	  border-top: none;
+  
+	  .grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		width: 85%;
+		margin: 1rem auto 1.5rem;
+  
+		.child {
+		  width: 100%;
+		}
+  
+		p {
+		  margin: 0 0 .5rem;
+		}
+	  }
+  
+	  .input {
+		width: 100%;
+		border-radius: 7px;
+		padding: .75rem 1.5rem;
+		border: 1px solid #005e5a;
+  
+		&:focus {
+		  outline: none;
+		}
+	  }
+  
+	  .upload {
+		width: 85%;
+		margin: 0 auto;
+	  }
+	}
+  
+	.buttons {
+	  display: flex;
+	  gap: 1.5rem;
+	  justify-content: space-evenly;
+	  padding: 1.5rem;
+	  background-color: white;
+  
+	  button {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border: 1px solid #005e5a;
+		padding: .75rem 2rem;
+		border-radius: 10px;
+		gap: .25rem;
+		cursor: pointer;
+		background-color: #005e5a;
+		color: white;
+  
+		.icon {
+		  display: grid;
+		  place-items: center;
+		}
+	  }
+  
+	  .back-button {
+		text-align: left;
+	  }
+	}
+  }
+  
+  
+  @media (max-width: 768px) {
+	.section {
+	  .grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	  }
+  
+	  .flex {
+		width: 100% !important;
+  
+		.child {
+		  width: 100%;
+		}
+	  }
+	}
+  }
+  
+  @media (max-width: 475px) {
+	.create-user {
+	  .title {
+		font-size: 18px;
+	  }
+  
+	  .section {
+		.grid {
+		  grid-template-columns: 1fr !important;
+		}
+  
+		.flex {
+		  flex-direction: column;
+		  width: 85% !important;
+  
+		  .child {
+			width: 100%;
+		  }
+		}
+	  }
+  
+	  .buttons {
+		padding: .75rem 0 !important;
+  
+		.back-button {
+		  width: 80% !important;
+		}
+  
+		.send-button {
+		  width: 80% !important;
+		  gap: .25rem;
+		}
+	  }
+	}
+  }
+  

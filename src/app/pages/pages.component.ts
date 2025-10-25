@@ -25,7 +25,10 @@ export class PagesComponent implements OnInit {
 
   baseUrl: string = environment.baseUrl;
   isAdmin!: boolean;
-  pages!: Page[];
+  services: Page[] = [];
+  appointments: Page[] = [];
+  supports: Page[] = [];
+  state: 0 | 1 | 2 | 3 = 0;
   displayedColumns: string[] = ['no', 'title', 'link', 'image', 'category', 'action'];
   dataSource: MatTableDataSource<Page> = new MatTableDataSource();
 
@@ -42,15 +45,27 @@ export class PagesComponent implements OnInit {
     this.http.get<Page[]>(this.baseUrl + `page`)
       .subscribe((data) => {
         if (data && data.length > 0) {
-          this.pages = data;
           this.dataSource = new MatTableDataSource(data);
+					data.forEach((page) => {
+						switch (page.category) {
+							case 'Service Request':
+								this.services.push(page);
+								break;
+							case 'Appointment Request':
+								this.appointments.push(page);
+								break;
+							default:
+								this.supports.push(page);
+								break;
+						}
+					})
         }
       })
   }
 
   editPage(page: Page) {
     localStorage.setItem('page', JSON.stringify(page));
-    this.router.navigate(['/', 'pages', 'edit']).then(()=> {return;});
+    this.router.navigate(['/', 'requests', 'edit']).then(()=> {return;});
   }
 
   protected readonly window = window;
