@@ -22,6 +22,7 @@ export class CreateAccountComponent implements OnInit {
   lastName!: string;
   phone!: string;
   email!: string;
+  adminType!: 'main' | 'staff' | 'supervisor';
   address!: string;
   password!: string;
   confirmPassword!: string;
@@ -47,6 +48,7 @@ export class CreateAccountComponent implements OnInit {
           this.lastName = user.lastName;
           this.phone = user.phone;
           this.email = user.email;
+          this.adminType = user.adminType;
           this.address = user.address;
           this.userId = user.id;
         }
@@ -73,7 +75,7 @@ export class CreateAccountComponent implements OnInit {
       && this.email && this.phone && this.address) {
       this.http.patch(this.baseUrl + `user/${(this.userId)}`, {
         password: this.password, lastName: this.lastName, firstName: this.firstName,
-        email: this.email, phone: this.phone, address: this.address,
+        email: this.email, phone: this.phone, address: this.address, adminType: this.adminType,
       }).pipe(
         catchError((err) => {
           console.error(err);
@@ -93,7 +95,7 @@ export class CreateAccountComponent implements OnInit {
       if (this.password === this.confirmPassword) {
         this.http.post(this.baseUrl + 'user/', {
           password: this.password, lastName: this.lastName, firstName: this.firstName,
-          email: this.email, phone: this.phone, address: this.address,
+          email: this.email, phone: this.phone, address: this.address, adminType: this.adminType,
         }).pipe(
           catchError((err) => {
             console.error(err);

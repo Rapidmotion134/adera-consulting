@@ -17,7 +17,7 @@ import { RegistrationComponent } from './registration/registration.component';
 
 export const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'registration', pathMatch: 'full', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: 'users', pathMatch: 'full', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'users/view/:userId', pathMatch: 'full', component: ViewUserComponent, canActivate: [AuthGuard] },

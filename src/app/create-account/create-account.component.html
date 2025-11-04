@@ -32,7 +32,15 @@
           </div>
           <div class="child">
             <p>Address</p>
-            <input type="text" [(ngModel)]="address" name="address1" class="input" placeholder="Enter Primary Address" required>
+            <input type="text" [(ngModel)]="address" name="address" class="input" placeholder="Enter Primary Address" required>
+          </div>
+          <div class="child">
+            <p>Admin Type</p>
+            <select class="input" [id]="adminType" [(ngModel)]="adminType" name="admin-type">
+              <option value="main" selected>{{ 'Main' }}</option>
+              <option value="staff">{{ 'Staff' }}</option>
+              <option value="supervisor">{{ 'Supervisor' }}</option>
+            </select>
           </div>
           <div class="child">
             <p>Password</p>

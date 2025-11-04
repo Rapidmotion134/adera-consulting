@@ -9,8 +9,6 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-responsive.module";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import * as jose from 'jose';
-import {AuthService} from '../auth/auth.service';
 import {NgOptimizedImage} from '@angular/common';
 import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent} from '@angular/material/dialog';
 
@@ -35,43 +33,28 @@ export class DashboardComponent implements OnInit {
 
   constructor(private dataService: DataService,
               private route: ActivatedRoute,
-              private authService: AuthService,
 							private router: Router) { }
 
   baseUrl: string = environment.baseUrl;
   isAdmin!: boolean;
+  adminType!: string;
   isNew!: boolean;
   readonly dialog = inject(MatDialog);
 	userId!: string;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      const token: string = params['token'];
       this.isNew = params['new'];
-      if (token) {
-        localStorage.setItem("access_token", token);
-        this.authService.setLoginStatus(true);
-        const decoded = jose.decodeJwt(token);
-        if (decoded.sub) {
-          if (!decoded['registered']){
-            this.isNew = true;
-          }
-					this.userId = <string>decoded["userId"];
-          localStorage.setItem('userId', this.userId);
-          localStorage.setItem('username', <string>decoded.sub);
-          localStorage.setItem('isSuper', <string>decoded['isSuperAdmin']);
-          this.dataService.setIsAdmin(<boolean>decoded['isAdmin']);
-        }
-      }
-    });
-		this.dataService.isAdmin$.subscribe(data => {
-      this.isAdmin = data;
     });
     if (this.isNew) {
       this.openDialog();
-			this.isAdmin = false;
     } else {
-      this.router.navigate(['/dashboard'], {replaceUrl: true}).then(() => { });
+      this.dataService.isAdmin$.subscribe(data => {
+        this.isAdmin = data;
+      });
+      this.dataService.adminType$.subscribe(data => {
+        this.adminType = data;
+      });
     }
   }
 

@@ -17,7 +17,9 @@ export class App implements OnInit, OnDestroy {
   url!: string;
   subscription!: Subscription;
   adminSubscription!: Subscription;
+  adminTypeSubscription!: Subscription;
   isAdmin!: boolean;
+  adminType!: string;
   isLoggedIn!: boolean;
 
   constructor(public router: Router,
@@ -36,11 +38,15 @@ export class App implements OnInit, OnDestroy {
     this.adminSubscription = this.dataService.isAdmin$.subscribe((isAdmin) => {
       this.isAdmin = isAdmin;
     })
+    this.adminTypeSubscription = this.dataService.adminType$.subscribe((adminType) => {
+      this.adminType = adminType;
+    })
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.adminSubscription.unsubscribe();
+    this.adminTypeSubscription.unsubscribe();
   }
 
 }

@@ -33,19 +33,24 @@ export class AuthService {
       }),
       tap((response: any): void => {
         if (response) {
-          localStorage.setItem("access_token", response["access_token"]);
-          this._isLoggedIn$.next(true);
-          const decoded = jose.decodeJwt(response["access_token"]);
-          if (decoded.sub) {
-            localStorage.setItem('userId', <string>decoded["userId"]);
-            localStorage.setItem('username', <string>decoded.sub);
-            localStorage.setItem('isSuper', <string>decoded['isSuperAdmin']);
-          }
+          this.setUserInfo(response["access_token"]);
         } else {
           return response;
         }
       })
     )
+  }
+
+  setUserInfo (access_token: string) {
+    localStorage.setItem("access_token", access_token);
+    this._isLoggedIn$.next(true);
+    const decoded = jose.decodeJwt(access_token);
+    if (decoded.sub) {
+      localStorage.setItem('userId', <string>decoded["userId"]);
+      localStorage.setItem('username', <string>decoded.sub);
+      localStorage.setItem('isSuper', <string>decoded['isSuperAdmin']);
+      localStorage.setItem('adminType', <string>decoded['adminType']);
+    }
   }
 
   logOut () {

@@ -38,7 +38,7 @@
         </span>
       </button>
       <mat-menu #menu="matMenu">
-        @if (isAdmin) {
+        @if (isAdmin && adminType === 'main') {
           <button mat-menu-item [routerLink]="['/', 'users', 'create']">Create Account</button>
         }
         <button mat-menu-item (click)="logOut()">Sign Out</button>
@@ -54,14 +54,22 @@
     @if (isAdmin) {
       <ng-container>
         <p class="nav" [routerLink]="['dashboard']" (click)="toggleNavbar()">Dashboard</p>
-        <p class="nav" [routerLink]="['users']" (click)="toggleNavbar()">Users</p>
-        <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Payments</p>
+        @if (adminType !== 'staff') {
+          <p class="nav" [routerLink]="['users']" (click)="toggleNavbar()">Users</p>
+        }
+        @if (adminType !== 'supervisor' && adminType !== 'staff') {
+          <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Payments</p>
+        }
         <mat-divider></mat-divider>
         <p class="nav" [routerLink]="['documents']" (click)="toggleNavbar()">Documents</p>
 				<p class="nav" [routerLink]="['document', 'select']" (click)="toggleNavbar()">Send Document</p>
-				<p class="nav" [routerLink]="['requests']" (click)="toggleNavbar()">Requests</p>
+        @if (adminType !== 'staff') {
+          <p class="nav" [routerLink]="['requests']" (click)="toggleNavbar()">Requests</p>
+        }
         <p class="nav" [routerLink]="['notifications']" (click)="toggleNavbar()">Notifications</p>
-        <p class="nav additional" [routerLink]="['/', 'users', 'create']" (click)="toggleNavbar()">Create Account</p>
+        @if (adminType !== 'staff') {
+          <p class="nav additional" [routerLink]="['/', 'users', 'create']" (click)="toggleNavbar()">Create Account</p>
+        }
         <p class="nav additional" (click)="logOut()">Sign Out</p>
       </ng-container>
     } @else {

@@ -7,6 +7,7 @@ export interface User {
   address: string;
   registrationDate: Date;
   isAdmin: boolean;
+  adminType: 'main' | 'staff' | 'supervisor';
   isActive: boolean;
 }
 

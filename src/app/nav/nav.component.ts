@@ -37,6 +37,7 @@ export class NavComponent implements OnInit, AfterViewInit {
   ) { }
 
   @Input() isAdmin!: boolean;
+  @Input() adminType!: string;
   page!: string;
   baseUrl: string = environment.baseUrl;
   userId: string = `${localStorage.getItem('userId')}`;

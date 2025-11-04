@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../auth/auth.service";
 import * as jose from 'jose';
 import {Subscription} from "rxjs";
@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   constructor(private authService: AuthService,
               private router: Router,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -35,9 +36,24 @@ export class LoginComponent implements OnInit, OnDestroy{
         if (token) {
           const decoded = jose.decodeJwt(token);
           this.dataService.setIsAdmin(<boolean>decoded['isAdmin']);
+          this.dataService.setAdminType(<string>decoded['adminType']);
         }
       }
     }));
+    this.route.queryParams.subscribe((params) => {
+      const token: string = params['token'];
+      if (token) {
+        this.authService.setUserInfo(token);
+        const decoded = jose.decodeJwt(token);
+        this.dataService.setIsAdmin(<boolean>decoded['isAdmin']);
+        this.dataService.setAdminType(<string>decoded['adminType']);
+        if (!decoded['registered']) {
+          this.router.navigate([`/`, `dashboard`], { queryParams: { new: true } }).then(()=> {return;});
+        } else {
+          this.router.navigate([`/`, `dashboard`]).then(()=> {return;});
+        }
+      }
+    });
   }
 
   ngOnDestroy() {
