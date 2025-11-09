@@ -94,14 +94,16 @@
     <div>
       <a [routerLink]="['/', 'document', 'sendTo', userId]">Send Document</a>
     </div>
-    <div>
-      <a (click)="editUser()">Edit Account</a>
-    </div>
-    <div>
-      <a (click)="changeActivationStatus()">{{user.isActive ? 'Deactivate Account' : 'Activate Account'}}</a>
-    </div>
-    <div>
-      <a (click)="confirmation()">Delete Account</a>
-    </div>
+    @if (adminType === 'main') {
+      <div>
+        <a (click)="editUser()">Edit Account</a>
+      </div>
+      <div>
+        <a (click)="changeActivationStatus()">{{user.isActive ? 'Deactivate Account' : 'Activate Account'}}</a>
+      </div>
+      <div>
+        <a (click)="confirmation()">Delete Account</a>
+      </div>
+    }
   </div>
 </div>

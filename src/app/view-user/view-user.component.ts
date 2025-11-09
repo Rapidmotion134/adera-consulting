@@ -1,13 +1,14 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {User} from "../interfaces";
 import {environment} from "../../environments/environment";
 import {Location, TitleCasePipe} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import {Clipboard} from "@angular/cdk/clipboard";
-import {MatIconButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialog} from "./confirmation-dialog";
+import {DataService} from '../data.service';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-view-user',
@@ -18,11 +19,12 @@ import {ConfirmationDialog} from "./confirmation-dialog";
     templateUrl: './view-user.component.html',
     styleUrl: './view-user.component.scss'
 })
-export class ViewUserComponent {
+export class ViewUserComponent implements OnInit {
 
   userId: any;
   user!: User;
   baseUrl: string = environment.baseUrl;
+  adminType!: string;
   dialog = inject(MatDialog);
 
   constructor(
@@ -30,7 +32,8 @@ export class ViewUserComponent {
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
     private clipboard: Clipboard,
-    private router: Router
+    private router: Router,
+    private dataService: DataService,
   ) {  }
 
   clickToCopy(textToCopy: string) {
@@ -39,6 +42,9 @@ export class ViewUserComponent {
 
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId');
+    this.dataService.adminType$.subscribe((adminType) => {
+      this.adminType = adminType;
+    })
     this.http.get<User>(this.baseUrl + `user/${this.userId}`)
       .subscribe((data) => {
         if (data) {

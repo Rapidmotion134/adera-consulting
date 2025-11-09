@@ -1,14 +1,14 @@
 .login {
-  background-color: #f5faf5;
+  background-color: #015d5a;
   display: grid;
   place-items: center;
   min-height: 100vh;
 }
 
 .container {
-  background-color: white;
+  background-color: #001212;
   width: 30%;
-  border: 1px solid #e1e3e5;
+  border: 1px solid #001212;
   border-radius: 30px;
   margin: 2rem auto;
 }
@@ -26,11 +26,7 @@
   cursor: pointer;
   color: #005e5a;
   text-decoration: none;
-  transition: background-color 0.25s;
-
-  &:hover {
-    background-color: #e1e3e5;
-  }
+  background-color: #e1e3e5;
 
   svg {
     fill: #005e5a;
@@ -44,7 +40,7 @@ svg {
 .company {
   display: grid;
   place-items: center;
-  padding: 1.5rem 1.5rem 0;
+  padding: 1rem;
 }
 
 .logo {
@@ -63,6 +59,7 @@ p {
   margin: 1rem auto 2rem;
 
   p {
+    color: white;
     font-size: 12px;
     margin: 0 auto .5rem;
   }
@@ -107,7 +104,7 @@ button.icon {
 
 .sign-up {
 	text-decoration: none;
-	color: black;
+	color: white;
 	opacity: .75;
 	text-align: center;
 	transition: opacity 200ms ease-in;

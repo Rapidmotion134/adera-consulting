@@ -6,7 +6,7 @@ import {Router, RouterLink} from "@angular/router";
 import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-responsive.module";
 import { MatButtonModule } from '@angular/material/button';
 import {DataService} from '../data.service';
-import {DatePipe, NgClass, TitleCasePipe} from '@angular/common';
+import {DatePipe, Location, NgClass, TitleCasePipe} from '@angular/common';
 import {Payment} from '../interfaces';
 import {MatDialog} from '@angular/material/dialog';
 import {PaymentDialog} from './payment-dialog';
@@ -38,6 +38,7 @@ export class PaymentComponent implements OnInit{
 
   constructor(private http: HttpClient,
               private dataService: DataService,
+              private location: Location,
               private sharedService: SharedService,
               private router: Router) {
   }
@@ -80,9 +81,13 @@ export class PaymentComponent implements OnInit{
     });
   }
 
-  checkout (payment: Payment) {
-    localStorage.setItem('payment', JSON.stringify(payment));
-    this.router.navigate(['/', 'checkout', payment.id]).then(()=> {return;});
+  // checkout (payment: Payment) {
+  //   localStorage.setItem('payment', JSON.stringify(payment));
+  //   this.router.navigate(['/', 'checkout', payment.id]).then(()=> {return;});
+  // }
+
+  navigateBack() {
+    this.location.back();
   }
 
 }

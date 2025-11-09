@@ -12,7 +12,7 @@
     cursor: pointer;
   }
 
-  .button {
+  .add-button {
     border: 2px solid #005e5a;
     padding: .75rem 2rem;
     gap: 1rem;
@@ -45,7 +45,7 @@
 			min-height: 80vh;
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
-			gap: 1rem; 
+			gap: 1rem;
 			place-items: center;
 
 			.option {
@@ -113,8 +113,10 @@
 		}
   }
 
-	@media (max-width: 475px) { 
+	@media (max-width: 475px) {
 		.pages-container {
+      grid-template-columns: 1fr;
+
 			.container {
 				min-height: 75vh;
 				grid-template-columns: 1fr;
@@ -123,7 +125,7 @@
 					height: 100%;
 					font-size: 15px;
 					justify-content: start;
-					padding-left: 1rem; 
+					padding-left: 1rem;
 				}
 			}
 		}
