@@ -70,14 +70,19 @@
     }
 
     .page {
-      display: grid;
-      grid-template-rows: 1fr 1.2fr;
+      display: flex;
+      flex-direction: column;
       border: 1px solid #005e5a;
       cursor: pointer;
 
       .thumbnail {
+        height: 8rem;
         background-color: transparent;
-        //border-bottom: 1px solid #005e5a;
+
+        img {
+          height: 100%;
+          object-fit: cover;
+        }
       }
 
       .title {

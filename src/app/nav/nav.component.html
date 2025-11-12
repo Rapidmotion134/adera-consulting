@@ -61,13 +61,15 @@
           <p class="nav" [routerLink]="['payment']" (click)="toggleNavbar()">Payments</p>
         }
         <mat-divider></mat-divider>
-        <p class="nav" [routerLink]="['documents']" (click)="toggleNavbar()">Documents</p>
+        @if (adminType !== 'staff') {
+          <p class="nav" [routerLink]="['documents']" (click)="toggleNavbar()">Documents</p>
+        }
 				<p class="nav" [routerLink]="['document', 'select']" (click)="toggleNavbar()">Send Document</p>
         @if (adminType !== 'staff') {
           <p class="nav" [routerLink]="['requests']" (click)="toggleNavbar()">Requests</p>
         }
         <p class="nav" [routerLink]="['notifications']" (click)="toggleNavbar()">Notifications</p>
-        @if (adminType !== 'staff') {
+        @if (adminType === 'main') {
           <p class="nav additional" [routerLink]="['/', 'users', 'create']" (click)="toggleNavbar()">Create Account</p>
         }
         <p class="nav additional" (click)="logOut()">Sign Out</p>
