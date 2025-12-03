@@ -13,7 +13,11 @@
     </svg>
   </span>
   <p>Click to Upload </p>
-  or drag and drop PDF, DOCX, PNG files
+  @if (fileType === 'docs') {
+    or drag and drop PDF, DOCX, PNG files
+  } @else {
+    or drag and drop JPEG or PNG files
+  }
 </div>
 
 @if (file) {

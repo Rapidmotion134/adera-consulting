@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import {DecimalPipe, NgClass} from "@angular/common";
 import {environment} from "../../environments/environment";
 import {IFileUploadService, UploadProgress} from "./service/file-upload.service.interface";
@@ -22,12 +22,14 @@ export class DragAndDropUploadComponent {
   url!: string;
   file!: File;
   files: File[] = [];
-  acceptedFileTypes: string[] = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/png'];
   dragged: boolean = false;
   uploading = false;
   uploadCompletedCount = 0;
   uploadProgresses: UploadProgress[] = [];
   fileUrls: string[] = [];
+
+  @Input() acceptedFileTypes: string[] = [];
+  @Input() fileType: "docs" | "images" = "docs";
 
   @Output() uploadStarted: EventEmitter<File[]> = new EventEmitter();
   @Output() uploadProgress: EventEmitter<{
@@ -77,7 +79,11 @@ export class DragAndDropUploadComponent {
       if (this.isFileTypeAccepted(file)) {
         this.files.push(file); // Add valid files to the array
       } else {
-        alert(`File type not accepted: ${file.name}. Accepted types: PDF, DOCX, PNG.`);
+        if (this.fileType === "docs") {
+          alert(`File type not accepted: ${file.name}. Accepted types: PDF, DOCX, PNG.`);
+        } else {
+          alert(`File type not accepted: ${file.name}. Accepted types: JPEG or PNG.`);
+        }
       }
     }
 

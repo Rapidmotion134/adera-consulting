@@ -35,6 +35,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
   search: any;
 	state: 0 | 1 | 2 = 0;
   isAdmin!: boolean;
+  isForUser: boolean = false;
 
   displayedColumns: string[] = ['no', 'title', 'type', 'id', 'date', 'status', 'actions'];
   userDisplayedColumns: string[] = ['no', 'title', 'type', 'id', 'date', 'status', 'actions'];
@@ -70,6 +71,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
             }
           });
       } else {
+        this.isForUser = true;
         this.http.get<Document[]>(this.baseUrl + `document/user/${userId}`)
           .subscribe((data) => {
             if (data.length) {

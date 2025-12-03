@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideNgxStripe(environment.STRIPE_PUBLIC_KEY),
+    // provideNgxStripe(environment.STRIPE_PUBLIC_KEY),
     provideHttpClient(
       withInterceptorsFromDi(),
     ),

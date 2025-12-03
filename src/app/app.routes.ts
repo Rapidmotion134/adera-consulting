@@ -30,7 +30,7 @@ export const routes: Routes = [
   // { path: 'request/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
   // { path: 'request/sendTo/:userId', pathMatch: 'full', component: RequestDocumentComponent, canActivate: [AuthGuard] },
   { path: 'documents', pathMatch: 'full', component: DocumentsComponent, canActivate: [AuthGuard] },
-  // { path: 'documents/:userId', pathMatch: 'full', component: DocumentsComponent, canActivate: [AuthGuard] },
+  { path: 'documents/:userId', pathMatch: 'full', component: DocumentsComponent, canActivate: [AuthGuard] },
   { path: 'notifications', pathMatch: 'full', component: NotificationsComponent, canActivate: [AuthGuard] },
   { path: 'payment', pathMatch: 'full', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'payment/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },

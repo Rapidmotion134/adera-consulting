@@ -1,5 +1,5 @@
 <div class="documents">
-  @if (isAdmin) {
+  @if (isAdmin && !isForUser) {
     <div>
       <p class="title">Action</p>
       <div class="flex add-button" [routerLink]="['/', 'document', 'upload']">

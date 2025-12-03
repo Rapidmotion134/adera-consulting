@@ -37,6 +37,8 @@
       <div class="upload">
         <p>Upload File</p>
         <app-drag-and-drop-upload
+          [acceptedFileTypes]="['image/png', 'image/jpeg']"
+          [fileType]="'images'"
           (fileUploaded)="onFileUploaded($event)"
         ></app-drag-and-drop-upload>
       </div>

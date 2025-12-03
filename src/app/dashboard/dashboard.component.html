@@ -1,7 +1,7 @@
 <div class="dashboard">
   @if (!isAdmin) {
     <img ngSrc="../../assets/bg.png" alt="" width="1920" height="280">
-    <h1>Welcome to Adera</h1>
+    <h1>Welcome to your cloud home</h1>
   }
   <div class="container">
     @if (adminType !== 'staff') {
@@ -38,7 +38,11 @@
           </svg>
         </span>
       </span>
-        <p class="name">Requests</p>
+        @if (!isAdmin) {
+          <p class="name">Send your Request</p>
+        } @else {
+          <p class="name">Requests</p>
+        }
       </div>
     }
 <!--    @if (!isAdmin) {-->
