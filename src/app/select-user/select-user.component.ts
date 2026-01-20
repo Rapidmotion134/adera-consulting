@@ -17,7 +17,7 @@ import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-respon
         MatTableResponsiveModule
     ],
     templateUrl: './select-user.component.html',
-    styleUrl: '../users/users.component.scss'
+    styleUrl: '../users/users.component.scss',
 })
 export class SelectUserComponent implements OnInit{
 
@@ -25,7 +25,7 @@ export class SelectUserComponent implements OnInit{
   baseUrl: string = environment.baseUrl;
   search!: string;
 
-  displayedColumns: string[] = ['id', 'name', 'phone', 'regDate', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'phone', 'regDate', 'actions'];
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
   filteredDataSource: MatTableDataSource<User> = new MatTableDataSource();
 
@@ -42,8 +42,11 @@ export class SelectUserComponent implements OnInit{
         this.selectFor = 'invoice';
         break;
       case 'payment':
-          this.selectFor = 'payment';
-          break;
+        this.selectFor = 'payment';
+        break;
+      case 'milestones':
+        this.selectFor = 'milestones';
+        break;
       default:
         this.selectFor = 'request';
         break;

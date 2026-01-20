@@ -40,7 +40,7 @@
       <div class="upload">
         <p>Upload File</p>
         <app-drag-and-drop-upload
-          [acceptedFileTypes]="['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/png']"
+          [acceptedFileTypes]="['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/png', 'image/jpeg']"
           [fileType]="'docs'"
           (fileUploaded)="onFileUploaded($event)"
         ></app-drag-and-drop-upload>

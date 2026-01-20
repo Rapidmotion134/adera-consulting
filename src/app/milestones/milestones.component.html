@@ -1,0 +1,116 @@
+<div class="milestones">
+  <div class="flex">
+    <div class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info" viewBox="0 0 16 16">
+        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+      </svg>
+    </div>
+    <p class="title">Milestone Management</p>
+  </div>
+  <div class="milestones-container">
+    @for (milestone of milestones; track milestone.id;) {
+      <div class="phase" [ngClass]="{'selected': milestone.id === selectedMilestone}" (click)="selectMilestone(milestone)">
+        <div class="icon" [ngClass]="{'completed': milestone.status === 'completed', 'in-progress': milestone.status === 'in-progress', 'pending': milestone.status === 'pending'}">
+          @if (milestone.status === "completed") {
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+              <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
+              <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+            </svg>
+          } @else if (milestone.status === "in-progress") {
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-square-dotted" viewBox="0 0 16 16">
+              <path d="M2.5 0q-.25 0-.487.048l.194.98A1.5 1.5 0 0 1 2.5 1h.458V0zm2.292 0h-.917v1h.917zm1.833 0h-.917v1h.917zm1.833 0h-.916v1h.916zm1.834 0h-.917v1h.917zm1.833 0h-.917v1h.917zM13.5 0h-.458v1h.458q.151 0 .293.029l.194-.981A2.5 2.5 0 0 0 13.5 0m2.079 1.11a2.5 2.5 0 0 0-.69-.689l-.556.831q.248.167.415.415l.83-.556zM1.11.421a2.5 2.5 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415zM16 2.5q0-.25-.048-.487l-.98.194q.027.141.028.293v.458h1zM.048 2.013A2.5 2.5 0 0 0 0 2.5v.458h1V2.5q0-.151.029-.293zM0 3.875v.917h1v-.917zm16 .917v-.917h-1v.917zM0 5.708v.917h1v-.917zm16 .917v-.917h-1v.917zM0 7.542v.916h1v-.916zm15 .916h1v-.916h-1zM0 9.375v.917h1v-.917zm16 .917v-.917h-1v.917zm-16 .916v.917h1v-.917zm16 .917v-.917h-1v.917zm-16 .917v.458q0 .25.048.487l.98-.194A1.5 1.5 0 0 1 1 13.5v-.458zm16 .458v-.458h-1v.458q0 .151-.029.293l.981.194Q16 13.75 16 13.5M.421 14.89c.183.272.417.506.69.689l.556-.831a1.5 1.5 0 0 1-.415-.415zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373Q2.25 16 2.5 16h.458v-1H2.5q-.151 0-.293-.029zM13.5 16q.25 0 .487-.048l-.194-.98A1.5 1.5 0 0 1 13.5 15h-.458v1zm-9.625 0h.917v-1h-.917zm1.833 0h.917v-1h-.917zm1.834 0h.916v-1h-.916zm1.833 0h.917v-1h-.917zm1.833 0h.917v-1h-.917zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z"/>
+            </svg>
+          } @else {
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
+            </svg>
+          }
+        </div>
+        <p [ngClass]="{'completed': milestone.status === 'completed', 'in-progress': milestone.status === 'in-progress'}">
+          {{ milestone.status | titlecase }}
+        </p>
+        <h4>{{ milestone.title | titlecase }}</h4>
+      </div>
+    }
+  </div>
+  <div class="tasks">
+    <h2>Tasks</h2>
+    <table mat-table matTableResponsive
+           [dataSource]="dataSource" multiTemplateDataRows
+           class="mat-elevation-z8">
+      @for (column of columnsToDisplay; track $index) {
+        <ng-container matColumnDef="{{ column }}">
+          <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+          @if (column === 'no') {
+            <td mat-cell *matCellDef="let task">{{ $index + 1 }}</td>
+          } @else if ( column === 'title')  {
+            <td mat-cell *matCellDef="let task">{{task[column] | titlecase}}</td>
+          } @else if ( column === 'start date') {
+            <td mat-cell *matCellDef="let task">{{task["beginDate"] | date}}</td>
+          } @else if ( column === 'due date') {
+            <td mat-cell *matCellDef="let task">{{task["dueDate"] | date}}</td>
+          } @else {
+            <td mat-cell *matCellDef="let task">
+              <div class="status" [ngClass]="{'completed': task.status === 'completed', 'in-progress': task.status !== 'completed'}">
+                {{task[column] | titlecase}}
+              </div>
+            </td>
+          }
+        </ng-container>
+      }
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell *matCellDef="let task">
+          <button
+            matIconButton
+            aria-label="expand row"
+            (click)="toggle(task); $event.stopPropagation()"
+            class="example-toggle-button"
+            [class.example-toggle-button-expanded]="isExpanded(task)">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let task" [attr.colspan]="columnsToDisplayWithExpand.length">
+          <div class="detail-wrapper"
+               [class.detail-wrapper-expanded]="isExpanded(task)">
+            <div class="files">
+              <h5>Supporting Documents</h5>
+              @for (file of task.documents; track $index;) {
+                <div class="file">
+                  <div class="detail">
+                    <div class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-file-earmark-fill" viewBox="0 0 16 16">
+                        <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="name">{{file.title + '.' +  file.type}}</p>
+                      <P class="size">2.5MB</P>
+                    </div>
+                  </div>
+                  <button (click)="downloadFile(file.url)" mat-icon-button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#005e5a" class="bi bi-download" viewBox="0 0 16 16">
+                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                    </svg>
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+          class="example-element-row"
+          [class.example-expanded-row]="isExpanded(element)"
+          (click)="toggle(element)">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+  </div>
+</div>

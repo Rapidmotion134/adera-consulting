@@ -29,7 +29,7 @@ import {SharedService} from '../shared.service';
 export class PaymentComponent implements OnInit{
   state: 0 | 1 | 2 = 0;
   baseUrl: string = environment.baseUrl;
-  displayedColumns: string[] = ['no', 'service', 'name', 'amount', 'date', 'status', 'action'];
+  displayedColumns: string[] = ['no', 'service', 'name', 'amount', 'date', 'status', 'actions'];
   userId: any = localStorage.getItem('userId');
   isFirst: boolean = true;
   isAdmin!: boolean;

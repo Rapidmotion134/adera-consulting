@@ -1,0 +1,12 @@
+button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #005e5a;
+  padding: .1rem 1.5rem;
+  border-radius: 10px;
+  gap: .25rem;
+  cursor: pointer;
+  background-color: #005e5a;
+  color: white;
+}

@@ -29,7 +29,8 @@ export class PagesComponent implements OnInit {
   appointments: Page[] = [];
   supports: Page[] = [];
   state: 0 | 1 | 2 | 3 = 0;
-  displayedColumns: string[] = ['no', 'title', 'link', 'image', 'category', 'action'];
+  displayedColumns: string[] = ['no', 'title', 'link', 'image', 'category', 'actions'];
+  requests: Page[] = [];
   dataSource: MatTableDataSource<Page> = new MatTableDataSource();
 
   constructor(
@@ -45,6 +46,7 @@ export class PagesComponent implements OnInit {
     this.http.get<Page[]>(this.baseUrl + `page`)
       .subscribe((data) => {
         if (data && data.length > 0) {
+          this.requests = data;
           this.dataSource = new MatTableDataSource(data);
 					data.forEach((page) => {
 						switch (page.category) {
@@ -66,6 +68,21 @@ export class PagesComponent implements OnInit {
   editPage(page: Page) {
     localStorage.setItem('page', JSON.stringify(page));
     this.router.navigate(['/', 'requests', 'edit']).then(()=> {return;});
+  }
+
+  deletePage(page: Page) {
+    this.http.delete<{status: string}>(this.baseUrl + `page/${page.id}`)
+      .subscribe((response) => {
+        if (response.status === 'success') {
+          for (let index = 0; index < this.requests.length; index++) {
+            if (this.requests[index].id === page.id) {
+              this.requests.splice(index, 1);
+              this.dataSource = new MatTableDataSource(this.requests);
+              break;
+            }
+          }
+        }
+      });
   }
 
   protected readonly window = window;

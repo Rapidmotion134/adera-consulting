@@ -31,3 +31,31 @@
     }
   }
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  .button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #005e5a;
+    padding: .1rem 1.5rem;
+    gap: .25rem;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #005e5a;
+    color: white;
+
+    .icon {
+      display: grid;
+      place-items: center;
+    }
+  }
+
+  .title {
+    margin: 0;
+  }
+}

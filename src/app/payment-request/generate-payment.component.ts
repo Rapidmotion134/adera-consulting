@@ -22,7 +22,6 @@ export class GeneratePaymentComponent implements OnInit{
   bankName: any;
   accountName: any;
   accountNumber: any;
-  stripeAmount!: any;
   amount!: any;
   success: boolean = false;
 
@@ -45,16 +44,15 @@ export class GeneratePaymentComponent implements OnInit{
     this.bankName = '';
     this.accountName = '';
     this.accountNumber = '';
-    this.stripeAmount = undefined;
     this.amount = undefined;
     this.success = false;
   }
 
   sendPayment() {
-    if (this.userId && this.title && this.accountName && this.accountNumber
-    && this.bankName && this.amount && this.stripeAmount) {
+    if (this.userId && this.title && this.accountName
+      && this.accountNumber && this.bankName && this.amount) {
       this.http.post<Payment>(this.baseUrl + 'payment/', {
-        title: this.title, userId: this.userId, stripeAmount: this.stripeAmount, amount: this.amount,
+        title: this.title, userId: this.userId, amount: this.amount,
         bankName: this.bankName, accountName: this.accountName, bankAccount: this.accountNumber,
       }).subscribe((data) => {
         if (data) {

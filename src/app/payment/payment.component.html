@@ -101,7 +101,7 @@
 <!--              </td>-->
 <!--            </ng-container>-->
 <!--          } @else {-->
-            <ng-container matColumnDef="action">
+            <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef> </th>
               <td mat-cell *matCellDef="let payment">
                 @if (!payment.isPaid) {
@@ -191,7 +191,7 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="action">
+        <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let payment">
             <p class="view" (click)="openDialog(payment)">

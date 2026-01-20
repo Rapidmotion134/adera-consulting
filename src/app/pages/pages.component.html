@@ -42,12 +42,17 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="action">
+        <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>  </th>
           <td mat-cell *matCellDef="let page">
-            <p class="view" (click)="editPage(page)">
-              Edit
-            </p>
+            <div class="flex">
+              <p class="view" (click)="editPage(page)">
+                Edit
+              </p>
+              <p class="view delete" (click)="deletePage(page)">
+                Delete
+              </p>
+            </div>
           </td>
         </ng-container>
 

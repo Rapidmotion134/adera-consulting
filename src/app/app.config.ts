@@ -1,11 +1,10 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
-// import {environment} from '../environments/environment';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+// import {environment} from '../environments/environment';
 // import {provideNgxStripe} from 'ngx-stripe';
 
 export const appConfig: ApplicationConfig = {

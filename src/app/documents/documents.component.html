@@ -14,7 +14,7 @@
   }
 	@if (state !== 0 && !isAdmin) {
 		<div class="flex">
-			<p class="title">{{ state === 1 ? 'Agreements' : 'Milestones' }}</p>
+			<p class="title">{{ state === 1 ? 'Agreements' : 'Miscellaneous' }}</p>
 		</div>
 		@if (isAdmin) {
 			<div class="filters">
@@ -84,9 +84,14 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let document">
-            <p class="view" (click)="openDialog(document)">
-              View
-            </p>
+            <div class="flex">
+              <p class="view" (click)="openDialog(document)">
+                View
+              </p>
+              <p class="view delete" (click)="deleteDocument(document)">
+                Delete
+              </p>
+            </div>
           </td>
         </ng-container>
 
@@ -102,7 +107,7 @@
 		@if (state === 0) {
 			<div class="container">
 				<div class="option" (click)="state = 1">Agreements</div>
-				<div class="option" (click)="state = 2">Milestones</div>
+				<div class="option" (click)="state = 2">Miscellaneous</div>
 			</div>
 		} @else if (state === 1) {
 			<ng-container >

@@ -4,11 +4,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe, NgClass} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Document, /*Invoice, Request*/} from "../interfaces";
+import {Document} from "../interfaces";
 import {DataService} from "../data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DocumentDialog} from "./document-dialog";
-import {ActivatedRoute, RouterLink, /*RouterLink*/} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-responsive.module";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {SharedService} from "../shared.service";
@@ -41,6 +41,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
   userDisplayedColumns: string[] = ['no', 'title', 'type', 'id', 'date', 'status', 'actions'];
   // requestColumns: string[] = ['id', 'title', 'subject', 'date', 'status', 'actions'];
   // invoiceColumns: string[] = ['id', 'user', 'title', 'date', 'actions'];
+  documents: Document[] = [];
   dataSource: MatTableDataSource<Document> = new MatTableDataSource();
   filteredDataSource: MatTableDataSource<Document> = new MatTableDataSource();
 	agreements: Document[] = [];
@@ -54,7 +55,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
     private http: HttpClient,
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
-    private sharedService: SharedService,) { }
+    private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.dataService.isAdmin$.subscribe((data) => {
@@ -66,6 +67,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
         this.http.get<Document[]>(this.baseUrl + 'document')
           .subscribe((data) => {
             if (data.length) {
+              this.documents = data;
               this.dataSource.data = data;
               this.filteredDataSource.data = data;
             }
@@ -75,6 +77,7 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
         this.http.get<Document[]>(this.baseUrl + `document/user/${userId}`)
           .subscribe((data) => {
             if (data.length) {
+              this.documents = data;
               this.dataSource.data = data;
               this.filteredDataSource.data = data;
             }
@@ -149,6 +152,22 @@ export class DocumentsComponent implements OnInit, AfterViewInit{
     this.filteredDataSource.data = this.dataSource.filteredData.filter((data) => {
       return data?.type.toLowerCase().includes(this.search.toLowerCase());
     });
+  }
+
+  deleteDocument(document: Document) {
+    this.http.delete<{status: string}>(this.baseUrl + `document/${document.id}`)
+      .subscribe((response) => {
+        if (response.status === 'success') {
+          for (let index = 0; index < this.documents.length; index++) {
+            if (this.documents[index].id === document.id) {
+              this.documents.splice(index, 1);
+              this.dataSource = new MatTableDataSource(this.documents);
+              this.filteredDataSource = new MatTableDataSource(this.documents);
+              break;
+            }
+          }
+        }
+      });
   }
 
   onFilter() {

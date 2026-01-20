@@ -1,0 +1,179 @@
+.add-milestone {
+  width: 95%;
+  margin: 1.5rem auto;
+  border: 1px solid #005e5a;
+
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .page-title {
+    border: 1px solid #e1e3e5;
+    border-top: none;
+    background-color: white;
+    padding: 1rem 2rem;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 6rem 1rem 1.5rem;
+    border: 1px solid #e1e3e5;
+
+    .icon {
+      background-color: white;
+      color: #005e5a;
+      padding: .5rem;
+      display: grid;
+      place-items: center;
+      border-radius: 5px;
+    }
+
+    .flex {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  .section {
+    background-color: white;
+    padding: 1rem;
+    //border: 1px solid #e1e3e5;
+    border-top: none;
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 97%;
+      margin: 1rem auto 2rem;
+
+      .heading-title {
+        font-size: 20px;
+        font-weight: 600;
+        grid-column: 1/-1;
+      }
+
+      .child {
+        width: 100%;
+      }
+
+      p {
+        margin: 0;
+        &:first-of-type {
+          margin-bottom: .5rem;
+        }
+      }
+
+      h3 {
+        margin-bottom: 0;
+        grid-column: 1/-1;
+      }
+    }
+
+    .input {
+      width: 100%;
+      border-radius: 7px;
+      padding: .75rem 1.5rem;
+      border: 1px solid #005e5a;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .sub-heading {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #005e5a;
+        padding: .1rem 1.5rem;
+        border-radius: 10px;
+        gap: .25rem;
+        cursor: pointer;
+        background-color: #005e5a;
+        color: white;
+
+        .icon {
+          display: grid;
+          place-items: center;
+        }
+      }
+
+      h2 {
+        margin: .5rem 0;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-evenly;
+
+    button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #005e5a;
+      padding: .75rem 2rem;
+      border-radius: 10px;
+      gap: .25rem;
+      cursor: pointer;
+      background-color: #005e5a;
+      color: white;
+
+      .icon {
+        display: grid;
+        place-items: center;
+      }
+    }
+
+    .back-button {
+      text-align: left;
+    }
+  }
+
+  .tasks {
+    margin: .5rem 0;
+  }
+}
+
+@media (max-width: 475px) {
+  .attach {
+
+    .title {
+      font-size: 18px;
+    }
+
+    .section {
+
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .dates {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .buttons {
+      .back-button {
+        width: 80% !important;
+      }
+
+      .send-button {
+        width: 80% !important;
+      }
+    }
+  }
+}

@@ -80,7 +80,7 @@ export class DragAndDropUploadComponent {
         this.files.push(file); // Add valid files to the array
       } else {
         if (this.fileType === "docs") {
-          alert(`File type not accepted: ${file.name}. Accepted types: PDF, DOCX, PNG.`);
+          alert(`File type not accepted: ${file.name}. Accepted types: PDF, DOCX, PNG, JPEG.`);
         } else {
           alert(`File type not accepted: ${file.name}. Accepted types: JPEG or PNG.`);
         }

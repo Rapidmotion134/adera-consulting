@@ -58,7 +58,7 @@ export class NavComponent implements OnInit, AfterViewInit {
          } else if (url === 'documents') {
            this.page = this.router.url.split('?')[0].substring(1).split('/')[0].replace('-', ' ');
          } else {
-             this.page = this.router.url.split('?')[0].substring(1).split('/')[0];
+           this.page = this.router.url.split('?')[0].substring(1).split('/')[0];
          }
       }
     });

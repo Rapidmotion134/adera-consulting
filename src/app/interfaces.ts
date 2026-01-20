@@ -62,3 +62,22 @@ export interface Page {
   image: string;
   category: 'Service Request' | 'Appointment Request' | 'Support Request';
 }
+
+export interface Task {
+  title: string;
+  description: string;
+  beginDate: Date;
+  dueDate: Date;
+  status: 'pending' | 'in-progress' | 'completed';
+  documents: string[];
+}
+
+export interface Milestone {
+  id: number;
+  title: string;
+  startDate: Date;
+  dueDate: Date;
+  status: 'pending' | 'in-progress' | 'completed';
+  tasks: Task[];
+  user: User;
+}
