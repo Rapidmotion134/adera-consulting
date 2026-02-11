@@ -1,0 +1,92 @@
+<div class="projects">
+  <div class="flex">
+    <div class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-signpost-2-fill" viewBox="0 0 16 16">
+        <path d="M7.293.707A1 1 0 0 0 7 1.414V2H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h5v1H2.5a1 1 0 0 0-.8.4L.725 8.7a.5.5 0 0 0 0 .6l.975 1.3a1 1 0 0 0 .8.4H7v5h2v-5h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H9V6h4.5a1 1 0 0 0 .8-.4l.975-1.3a.5.5 0 0 0 0-.6L14.3 2.4a1 1 0 0 0-.8-.4H9v-.586A1 1 0 0 0 7.293.707"/>
+      </svg>
+    </div>
+    <p class="title">Projects</p>
+  </div>
+  @if (isAdmin) {
+    <div>
+      <p class="title">Action</p>
+      <div class="flex add-button" [routerLink]="['/', 'projects', 'add']">
+        <span class="icon-container">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+          </svg>
+        </span>
+        <p>Create Project</p>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="input">
+        <input class="field" [(ngModel)]="search" placeholder="Search By Client" name="search" (ngModelChange)="onInputChange()"/>
+        <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+          </span>
+      </div>
+    </div>
+  }
+  <ng-container>
+    <table mat-table matTableResponsive [dataSource]="filteredDataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let project; index as i">{{ i + 1 }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let project"> {{project.title | titlecase}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef> Client </th>
+        <td mat-cell *matCellDef="let project">
+          {{`${project.user.firstName} ${project.user.lastName}`}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="admin">
+        <th mat-header-cell *matHeaderCellDef> Admin </th>
+        <td mat-cell *matCellDef="let project">
+          {{`${project.admin.firstName} ${project.admin.lastName}`}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="start-date">
+        <th mat-header-cell *matHeaderCellDef> Start Date </th>
+        <td mat-cell *matCellDef="let project">
+          {{project["startDate"] | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="due-date">
+        <th mat-header-cell *matHeaderCellDef> Due Date </th>
+        <td mat-cell *matCellDef="let project">
+          {{project["dueDate"] | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let project">
+          <div class="flex">
+            <p class="view" [routerLink]="['/', 'projects', 'milestones', project.id]">
+              View
+            </p>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[20]"
+                   #paginator
+                   showFirstLastButtons="true">
+    </mat-paginator>
+  </ng-container>
+</div>

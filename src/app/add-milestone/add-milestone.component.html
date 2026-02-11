@@ -3,37 +3,49 @@
     <div class="header">
       <div class="flex">
         <span class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
-            <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
-            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-text"
+               viewBox="0 0 16 16">
+            <path
+              d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
+            <path
+              d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
           </svg>
         </span>
-        <p class="title">{{isEdit ? 'Edit Milestone' : 'Create Milestone'}}</p>
+        <p class="title">{{ isEdit ? 'Edit Project' : 'Create Project' }}</p>
       </div>
     </div>
     <div class="section">
       <div class="grid">
         <p class="heading-title">General Information</p>
-        <div class="child">
-          <label for="user">Client</label>
-          <select class="input" id="user" [(ngModel)]="user" >
-            @for (user of users; track user.id) {
-              <option [ngValue]="user" >{{ user.firstName + ' ' + user.lastName }}</option>
-            }
-          </select>
-        </div>
+        @if (!isEdit) {
+          <div class="child">
+            <label for="user">Client</label>
+            <select class="input" id="user" [(ngModel)]="user">
+              @for (user of users; track user.id) {
+                <option [ngValue]="user">
+                  {{ `${user.firstName} ${user.lastName}` }}
+                </option>
+              }
+            </select>
+          </div>
+        }
         <div class="child">
           <label for="project">Project Name</label>
-          <input type="text" id="project" [(ngModel)]="projectName" name="title" class="input" placeholder="Enter Project Title" required>
+          <input type="text" id="project" [(ngModel)]="projectName" name="title" class="input"
+                 placeholder="Enter Project Title" required>
         </div>
-        <div class="child">
-          <label for="admin">Project Manager</label>
-          <select class="input" id="admin" [(ngModel)]="admin" >
-            @for (admin of admins; track admin.id) {
-              <option [ngValue]="admin.firstName + ' ' + admin.lastName">{{ admin.firstName + ' ' + admin.lastName }}</option>
-            }
-          </select>
-        </div>
+        @if (isSuperAdmin) {
+          <div class="child">
+            <label for="admin">Project Manager</label>
+            <select class="input" id="admin" [(ngModel)]="admin" [compareWith]="compareAdmin">
+              @for (manager of admins; track manager.id) {
+                <option [ngValue]="manager">
+                  {{ `${manager.firstName} ${manager.lastName}` }}
+                </option>
+              }
+            </select>
+          </div>
+        }
         <div class="child">
           <label for="date">Start Date</label>
           <input type="date" [(ngModel)]="startDate" id="date" name="date" class="input" required>
@@ -42,82 +54,222 @@
           <label for="finishDate">Target Completion Date</label>
           <input type="date" [(ngModel)]="finishDate" id="finishDate" name="finishDate" class="input" required>
         </div>
-        <div class="child">
-          <p>Last Updated</p>
-          <p>{{"Dec 20, 2025"}}</p>
-        </div>
+        @if (isEdit) {
+          <div class="child">
+            <p>Last Updated</p>
+            @if (lastUpdated !== null) {
+              <p>{{ lastUpdated | date }}</p>
+            } @else {
+              <p>---</p>
+            }
+          </div>
+        }
       </div>
       <div class="sub-heading">
         <h2>Manage Milestone</h2>
-        <button class="send-button" type="button" (click)="addTask()">
+        <button class="add-button" type="button" (click)="addMilestone()">
           <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-plus" viewBox="0 0 16 16">
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-plus"
+                 viewBox="0 0 16 16">
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
             </svg>
           </span>
-          Add Task
+          Add Milestone
         </button>
       </div>
-      <div class="section">
-        <div class="tasks">
-          <h3>Tasks</h3>
-          <div class="grid">
-            @for (task of tasks; track $index) {
-              <h3>Task {{$index+1}}</h3>
-              <div class="child">
-                <label [for]="'title'+$index">Title</label>
-                <input type="text" [id]="'title'+$index" [(ngModel)]="task.title" [name]="'title'+$index" class="input" placeholder="Enter Task Title" required>
+      <div class="milestone section">
+        <div class="grid">
+          @for (milestone of milestones; track $index; let milestoneIndex = $index; ) {
+            <h3 style="grid-column: 1/-1; margin: 0;">Milestone {{ $index + 1 }}</h3>
+            <div class="child">
+              <label [for]="'milestone-title' + $index">Milestone Title</label>
+              <input
+                type="text"
+                class="input"
+                [id]="'milestone-title' + $index"
+                [name]="'milestone-title' + $index"
+                [(ngModel)]="milestone.title"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Enter Milestone Title"
+                required
+              >
+            </div>
+
+            <div class="child">
+              <label [for]="'milestone-date' + $index">Start Date</label>
+              <input
+                type="date"
+                class="input"
+                [id]="'milestone-date' + $index"
+                [name]="'milestone-date' + $index"
+                [(ngModel)]="milestone.startDate"
+                [ngModelOptions]="{ standalone: true }"
+                required
+              >
+            </div>
+
+            <div class="child">
+              <label [for]="'milestone-finishDate' + $index">
+                Due Date
+              </label>
+              <input
+                type="date"
+                class="input"
+                [id]="'milestone-finishDate' + $index"
+                [name]="'milestone-finishDate' + $index"
+                [(ngModel)]="milestone.dueDate"
+                [ngModelOptions]="{ standalone: true }"
+                required
+              >
+            </div>
+
+            <div class="tasks">
+              <div style="display: flex; justify-content: space-between; grid-column: 1/-1;">
+                <h3 style="margin: 0; padding: .5rem 0">Tasks</h3>
+                <button class="add-button" type="button" (click)="addTask(milestoneIndex)">
+                  <span class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-plus"
+                         viewBox="0 0 16 16">
+                      <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                  </span>
+                  Add Task
+                </button>
               </div>
-              <div class="child">
-                <label [for]="'description'+$index">Description</label>
-                <input type="text" id="'description'+$index" [(ngModel)]="task.description" [name]="'description'+$index" class="input" placeholder="Enter Task Description" required>
-              </div>
-              <div class="child">
-                <label [for]="'date'+$index">Start Date</label>
-                <input type="date" [(ngModel)]="task.beginDate" [id]="'date'+$index" name="date" class="input" required>
-              </div>
-              <div class="child">
-                <label [for]="'finishDate'+$index">Due Date</label>
-                <input type="date" [(ngModel)]="task.dueDate" [id]="'finishDate'+$index" name="finishDate" class="input" required>
-              </div>
-            }
-          </div>
+              @for (task of milestone.tasks; track $index; let taskIndex = $index; ) {
+                <div class="task-container">
+                  <h3>Task {{ $index + 1 }}</h3>
+                  <div class="child">
+                  <label [for]="'title' + $index">Title</label>
+                  <input
+                    type="text"
+                    class="input"
+                    [id]="'title' + $index"
+                    [name]="'title' + $index"
+                    [(ngModel)]="task.title"
+                    [ngModelOptions]="{ standalone: true }"
+                    placeholder="Enter Task Title"
+                    required
+                  >
+                  </div>
+
+                  <div class="child">
+                    <label [for]="'date' + $index">Start Date</label>
+                    <input
+                      type="date"
+                      class="input"
+                      [id]="'date' + $index"
+                      [name]="'date' + $index"
+                      [(ngModel)]="task.beginDate"
+                      [ngModelOptions]="{ standalone: true }"
+                      required
+                    >
+                  </div>
+
+                  <div class="child">
+                    <label [for]="'finishDate' + $index">Due Date</label>
+                    <input
+                      type="date"
+                      class="input"
+                      [id]="'finishDate' + $index"
+                      [name]="'finishDate' + $index"
+                      [(ngModel)]="task.dueDate"
+                      [ngModelOptions]="{ standalone: true }"
+                      required
+                    >
+                  </div>
+
+                  <div class="child description">
+                    <label [for]="'description' + $index">Description</label>
+                    <textarea
+                      class="input"
+                      [id]="'description' + $index"
+                      [name]="'description' + $index"
+                      [(ngModel)]="task.description"
+                      [ngModelOptions]="{ standalone: true }"
+                      placeholder="Enter Task Description"
+                      required
+                    >
+                    </textarea>
+                  </div>
+
+                  <div class="upload">
+                    <p>Upload File</p>
+                    <app-drag-and-drop-upload
+                      [acceptedFileTypes]="['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/png', 'image/jpeg']"
+                      [fileType]="'docs'"
+                      [isMilestone]="true"
+                      (fileUploaded)="onFileUploaded($event, milestoneIndex, $index)"
+                    ></app-drag-and-drop-upload>
+                  </div>
+
+                  @if (task.documents.length) {
+                    <div class="documents">
+                      @for (document of task.documents; track $index; ) {
+                        <div style="display: flex; justify-content: space-between; align-items: center">
+                          <p style="margin: 0">{{ document.title }}</p>
+                          <button matIconButton (click)="removeFile($index, taskIndex, milestoneIndex)">
+                            <mat-icon>
+                              remove
+                            </mat-icon>
+                          </button>
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
         </div>
-<!--        @for (milestone of milestones; track $index) {-->
-<!--          <div class="section">-->
-<!--            <h2>{{projectName | titlecase}} Milestone</h2>-->
-<!--          </div>-->
-<!--        }-->
       </div>
+      <!--        @for (milestone of milestones; track $index) {-->
+      <!--          <div class="section">-->
+      <!--            <h2>{{projectName | titlecase}} Milestone</h2>-->
+      <!--          </div>-->
+      <!--        }-->
     </div>
     <div class="section">
       <div class="buttons">
         <button class="back-button" type="button" (click)="navigateBack()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+               viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
           </svg>
           Back
         </button>
         @if (!isEdit) {
-          <button class="send-button" type="submit" (click)="createMilestone()">
+          <button class="send-button" type="submit" (click)="createProject()">
             <span>Finish</span>
-              <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                   class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
               </svg>
             </span>
           </button>
         } @else {
-          <button class="send-button" type="submit" (click)="editMilestone()">
+          <button class="send-button" type="submit" (click)="editProject()">
             <span>Finish</span>
             <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right"
+                 viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
             </svg>
           </span>
           </button>
         }
       </div>
+      @if (isError) {
+        <p class="error">
+          Fill all Required Fields
+        </p>
+      }
     </div>
   </div>
 } @else {
@@ -125,17 +277,19 @@
     <div class="container">
     <span class="icon-container">
       <span class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2"
+             viewBox="0 0 16 16">
+          <path
+            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
         </svg>
       </span>
     </span>
       @if (!isEdit) {
-        <p class="heading">Milestone Created Successfully</p>
-        <p class="extra-text">Milestone has been created<br/> successfully</p>
+        <p class="heading">Project Created Successfully</p>
+        <p class="extra-text">Project has been created<br/> successfully</p>
       } @else {
-        <p class="heading">Milestone Updated Successfully</p>
-        <p class="extra-text">Milestone has been updated<br/> successfully</p>
+        <p class="heading">Project Updated Successfully</p>
+        <p class="extra-text">Project has been updated<br/> successfully</p>
       }
       <button class="finish" (click)="done()">Done</button>
     </div>

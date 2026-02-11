@@ -8,16 +8,6 @@
       </div>
       <p class="title">Select User</p>
     </div>
-    @if (selectFor === "milestones") {
-      <button class="button" type="button" [routerLink]="['/', 'milestones', 'add']">
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-plus" viewBox="0 0 16 16">
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>
-            </span>
-        Add Milestone
-      </button>
-    }
   </div>
   <div class="filters">
     <div></div>
@@ -57,11 +47,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let user">
-        @if (selectFor !== 'milestones') {
-          <a [routerLink]="['/', selectFor, 'sendTo', user.id]">Choose Account</a>
-        } @else {
-          <a [routerLink]="['/', selectFor, user.id]">Choose Account</a>
-        }
+        <a [routerLink]="['/', selectFor, 'sendTo', user.id]">Choose Account</a>
       </td>
     </ng-container>
 

@@ -16,6 +16,7 @@ import {ViewUserComponent} from './view-user/view-user.component';
 import { RegistrationComponent } from './registration/registration.component';
 import {MilestonesComponent} from './milestones/milestones.component';
 import {AddMilestoneComponent} from './add-milestone/add-milestone.component';
+import {ProjectComponent} from './project/project.component';
 
 export const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
@@ -29,13 +30,11 @@ export const routes: Routes = [
   { path: 'document/sendTo/:userId', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
   { path: 'document/request', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
   { path: 'document/upload', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
-  // { path: 'request/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
-  // { path: 'request/sendTo/:userId', pathMatch: 'full', component: RequestDocumentComponent, canActivate: [AuthGuard] },
   { path: 'documents', pathMatch: 'full', component: DocumentsComponent, canActivate: [AuthGuard] },
-  { path: 'milestones', pathMatch: 'full', component: MilestonesComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'milestones/select', pathMatch: 'full', component: SelectUserComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'milestones/add', pathMatch: 'full', component: AddMilestoneComponent/*, canActivate: [AuthGuard]*/ },
-  { path: 'milestones/:userId', pathMatch: 'full', component: MilestonesComponent/*, canActivate: [AuthGuard]*/ },
+  { path: 'projects', pathMatch: 'full', component: ProjectComponent, canActivate: [AuthGuard] },
+  { path: 'projects/add', pathMatch: 'full', component: AddMilestoneComponent, canActivate: [AuthGuard] },
+  { path: 'projects/edit/:projectId', pathMatch: 'full', component: AddMilestoneComponent, canActivate: [AuthGuard] },
+  { path: 'projects/milestones/:projectId', pathMatch: 'full', component: MilestonesComponent, canActivate: [AuthGuard] },
   { path: 'documents/:userId', pathMatch: 'full', component: DocumentsComponent, canActivate: [AuthGuard] },
   { path: 'notifications', pathMatch: 'full', component: NotificationsComponent, canActivate: [AuthGuard] },
   { path: 'payment', pathMatch: 'full', component: PaymentComponent, canActivate: [AuthGuard] },

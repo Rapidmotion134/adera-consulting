@@ -30,6 +30,7 @@ export class DragAndDropUploadComponent {
 
   @Input() acceptedFileTypes: string[] = [];
   @Input() fileType: "docs" | "images" = "docs";
+  @Input() isMilestone: boolean = false;
 
   @Output() uploadStarted: EventEmitter<File[]> = new EventEmitter();
   @Output() uploadProgress: EventEmitter<{

@@ -1,0 +1,69 @@
+.projects {
+  width: 95%;
+  margin: 1rem auto;
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .add-button {
+    border: 2px solid #005e5a;
+    padding: .75rem 2rem;
+    width: fit-content;
+    background-color: white;
+    margin-bottom: 1rem;
+    cursor: pointer;
+
+    .icon-container {
+      background-color: #005e5a;
+      border-radius: 1000px;
+      display: grid;
+      place-items: center;
+      padding: .25rem;
+
+      svg {
+        fill: white;
+      }
+    }
+  }
+
+  .container {
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+    place-items: center;
+  }
+
+  table {
+    border: 1px solid #e1e3e5;
+    box-shadow: none;
+
+    .status {
+      padding: .5em .75em;
+      border-radius: 50px;
+      text-align: center;
+      margin: 0;
+    }
+
+    .view{
+      color: #005e5a;
+      cursor: pointer;
+      margin: 0;
+    }
+  }
+
+
+  @media (max-width: 475px) {
+    .container {
+      min-height: 75vh;
+      grid-template-columns: 1fr;
+
+      .option {
+        height: 100%;
+        font-size: 15px;
+      }
+    }
+  };
+}

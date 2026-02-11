@@ -64,12 +64,13 @@ export interface Page {
 }
 
 export interface Task {
+  id: number | undefined | null;
   title: string;
   description: string;
   beginDate: Date;
   dueDate: Date;
   status: 'pending' | 'in-progress' | 'completed';
-  documents: string[];
+  documents: any[];
 }
 
 export interface Milestone {
@@ -79,5 +80,15 @@ export interface Milestone {
   dueDate: Date;
   status: 'pending' | 'in-progress' | 'completed';
   tasks: Task[];
+}
+
+export interface Project {
+  id: number;
+  title: string;
+  startDate: Date;
+  dueDate: Date;
+  lastUpdated: Date;
   user: User;
+  admin: User;
+  milestones: Milestone[];
 }

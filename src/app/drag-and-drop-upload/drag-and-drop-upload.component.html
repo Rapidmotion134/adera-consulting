@@ -20,7 +20,7 @@
   }
 </div>
 
-@if (file) {
+@if (file && !isMilestone) {
   <div class="file-list">
     <h3>Uploaded File:</h3>
     <p>{{ file.name }} ({{ file.size / 1024 | number: '1.0-0' }} KB)</p>

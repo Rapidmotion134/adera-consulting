@@ -44,9 +44,6 @@ export class SelectUserComponent implements OnInit{
       case 'payment':
         this.selectFor = 'payment';
         break;
-      case 'milestones':
-        this.selectFor = 'milestones';
-        break;
       default:
         this.selectFor = 'request';
         break;

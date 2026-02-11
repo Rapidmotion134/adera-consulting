@@ -50,8 +50,11 @@
       align-items: end;
       justify-content: space-between;
       gap: 1rem;
-      width: 97%;
-      margin: 1rem auto 2rem;
+      margin: 0 auto 2rem;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
 
       .heading-title {
         font-size: 20px;
@@ -74,6 +77,44 @@
         margin-bottom: 0;
         grid-column: 1/-1;
       }
+
+      .description {
+        grid-column: 1/-1;
+      }
+
+      .upload {
+        grid-column: 1/-2;
+      }
+
+      .documents {
+        padding: 1rem;
+        display: grid;
+        grid-gap: .5rem;
+        align-self: flex-start;
+      }
+    }
+
+    .section.milestone {
+      padding-right: 0;
+      padding-bottom: 0;
+    }
+
+    .add-button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #005e5a;
+      padding: .1rem 1.5rem;
+      border-radius: 10px;
+      gap: .25rem;
+      cursor: pointer;
+      background-color: #005e5a;
+      color: white;
+
+      .icon {
+        display: grid;
+        place-items: center;
+      }
     }
 
     .input {
@@ -90,24 +131,6 @@
     .sub-heading {
       display: flex;
       justify-content: space-between;
-
-      button {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border: 1px solid #005e5a;
-        padding: .1rem 1.5rem;
-        border-radius: 10px;
-        gap: .25rem;
-        cursor: pointer;
-        background-color: #005e5a;
-        color: white;
-
-        .icon {
-          display: grid;
-          place-items: center;
-        }
-      }
 
       h2 {
         margin: .5rem 0;
@@ -144,11 +167,38 @@
   }
 
   .tasks {
-    margin: .5rem 0;
+    grid-column: 1/-1;
+    margin: .5rem 0 .5rem 1rem;
+
+    .task-container {
+      margin: 0 0 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  .error {
+    color: crimson;
+    text-align: center;
   }
 }
 
 @media (max-width: 475px) {
+  .add-milestone {
+    .section {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tasks {
+      .task-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
   .attach {
 
     .title {

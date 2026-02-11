@@ -2,20 +2,42 @@
   width: 97%;
   margin: 1rem auto;
 
-  .milestones-container {
+  .add-button {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #005e5a;
+    padding: .1rem 1rem;
+    border-radius: 10px;
+    gap: .75rem;
+    cursor: pointer;
+    background-color: #005e5a;
+    color: white;
+    height: 45px;
+
+    .icon {
+      display: grid;
+      place-items: center;
+    }
+  }
+
+  .milestones-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     padding: 1rem;
     background-color: white;
     margin-bottom: 1rem;
 
+    h3 {
+      grid-column: 1/-1;
+      margin: 0;
+    }
+
     .phase {
       display: grid;
       padding: 1rem;
       border-radius: 10px;
-      min-width: 200px;
-      width: calc((100% - 3rem) / 4);
       cursor: pointer;
 
       .completed {
@@ -27,7 +49,6 @@
 
       .icon {
         width: fit-content;
-        margin-bottom: .5rem;
         display: grid;
         place-items: center;
         padding: .8rem;
@@ -57,7 +78,7 @@
 
       p {
         font-size: 11px;
-        margin: 0;
+        margin: .5rem 0 0;
       }
 
       h4 {
@@ -75,7 +96,7 @@
     padding: 1rem;
     background-color: white;
 
-    h2 {
+    h3 {
       margin: 0 0 1rem;
     }
 
@@ -133,11 +154,12 @@
     .files {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+      grid-gap: 1rem;
       min-height: 0;
 
       h5 {
         grid-column: 1/-1;
-        margin: 0 0 1rem;
+        margin: 0;
       }
 
       .file {
@@ -146,17 +168,18 @@
         align-items: center;
         justify-content: space-between;
         padding: .5rem .75rem;
-        gap: 1rem;
+        gap: .5rem;
         height: 100%;
         border-radius: 10px;
 
         .detail {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: .5rem;
+          overflow: hidden;
 
           .icon {
-            padding: .75rem;
+            padding: .5rem;
             background-color: white;
             display: grid;
             place-items: center;
@@ -194,7 +217,9 @@
 }
 
 @media (max-width: 475px) {
-  .phase {
-    width: 100% !important;
+  .milestones {
+    .milestones-container {
+      grid-template-columns: 1fr;
+    }
   }
 }

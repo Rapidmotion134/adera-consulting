@@ -193,7 +193,7 @@ table {
 
         &:not([mat-sort-header]),
         &.mat-sort-header-disabled,
-        &.mat-column-actions {
+        &.mat-column-actions, &.mat-column-expand {
           display: none;
         }
       }
@@ -202,7 +202,7 @@ table {
     .mat-mdc-row {
       height: auto;
 
-      td.mat-mdc-cell:not(.mat-column-actions, .mat-column-expandedDetail, .mat-column-icon) {
+      td.mat-mdc-cell:not(.mat-column-actions, .mat-column-expand, .mat-column-expandedDetail, .mat-column-icon) {
         display: grid;
         grid-template-columns: 50% 50%;
         padding: 0.5rem;
@@ -225,7 +225,7 @@ table {
         padding: 0.5rem;
       }
 
-      td.mat-mdc-cell:is(.mat-column-actions, .mat-column-expandedDetail) {
+      td.mat-mdc-cell:is(.mat-column-actions, .mat-column-expand, .mat-column-expandedDetail) {
         display: flex;
         justify-content: center;
         padding: 0.5rem;
