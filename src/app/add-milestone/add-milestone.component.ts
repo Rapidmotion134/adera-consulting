@@ -20,6 +20,7 @@ import {MatIcon} from '@angular/material/icon';
   ],
   templateUrl: './add-milestone.component.html',
   styleUrl: './add-milestone.component.scss',
+  standalone: true,
   providers: []
 })
 export class AddMilestoneComponent implements OnInit {

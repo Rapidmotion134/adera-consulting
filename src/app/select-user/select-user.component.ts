@@ -8,16 +8,17 @@ import {environment} from "../../environments/environment";
 import {MatTableResponsiveModule} from "../mat-table-responsive/mat-table-responsive.module";
 
 @Component({
-    selector: 'app-select-user',
-    imports: [
-        MatTableModule,
-        ReactiveFormsModule,
-        FormsModule,
-        RouterLink,
-        MatTableResponsiveModule
-    ],
-    templateUrl: './select-user.component.html',
-    styleUrl: '../users/users.component.scss',
+  selector: 'app-select-user',
+  imports: [
+    MatTableModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterLink,
+    MatTableResponsiveModule
+  ],
+  templateUrl: './select-user.component.html',
+  styleUrl: '../users/users.component.scss',
+  standalone: true
 })
 export class SelectUserComponent implements OnInit{
 

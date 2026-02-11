@@ -7,10 +7,11 @@ import {map} from "rxjs/operators";
 import {merge, Observable} from "rxjs";
 
 @Component({
-    selector: 'app-drag-and-drop-upload',
-    imports: [DecimalPipe, NgClass],
-    templateUrl: './drag-and-drop-upload.component.html',
-    styleUrl: './drag-and-drop-upload.component.scss'
+  selector: 'app-drag-and-drop-upload',
+  imports: [DecimalPipe, NgClass],
+  templateUrl: './drag-and-drop-upload.component.html',
+  standalone: true,
+  styleUrl: './drag-and-drop-upload.component.scss'
 })
 export class DragAndDropUploadComponent {
 

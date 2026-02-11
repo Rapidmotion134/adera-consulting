@@ -12,12 +12,12 @@ import {environment} from '../../environments/environment';
 import {MatTableResponsiveModule} from '../mat-table-responsive/mat-table-responsive.module';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
-import {DocumentDialog} from '../documents/document-dialog';
 
 @Component({
   selector: 'app-milestones',
   imports: [MatTableModule, MatButtonModule, MatIconModule, TitleCasePipe, DatePipe, NgClass, MatTableResponsiveModule, MatMenuTrigger, MatMenu, MatMenuItem],
   templateUrl: './milestones.component.html',
+  standalone: true,
   styleUrl: './milestones.component.scss'
 })
 export class MilestonesComponent implements OnInit {
@@ -51,8 +51,9 @@ export class MilestonesComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(MilestoneDialog);
+    this.dialog.open(MilestoneDialog);
   }
+
   getMilestones(projectId: string) {
     this.http.get<Project>(this.baseUrl + `project/${projectId}`)
       .subscribe((data) => {
@@ -153,5 +154,6 @@ export class MilestonesComponent implements OnInit {
   templateUrl: 'milestone-dialog.html',
   imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true
 })
 export class MilestoneDialog {}

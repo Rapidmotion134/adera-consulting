@@ -1,25 +1,14 @@
-import {AfterViewInit, Component, inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DatePipe, TitleCasePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable, MatTableDataSource, MatTableModule
-} from '@angular/material/table';
+import { MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableResponsiveModule} from '../mat-table-responsive/mat-table-responsive.module';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {environment} from '../../environments/environment';
-import {Document, Project} from '../interfaces';
-import {MatDialog} from '@angular/material/dialog';
+import {Project} from '../interfaces';
 import {HttpClient} from '@angular/common/http';
 import {DataService} from '../data.service';
-import {SharedService} from '../shared.service';
-import {DocumentDialog} from '../documents/document-dialog';
 
 @Component({
   selector: 'app-project',
@@ -33,6 +22,7 @@ import {DocumentDialog} from '../documents/document-dialog';
     TitleCasePipe
   ],
   templateUrl: './project.component.html',
+  standalone: true,
   styleUrl: './project.component.scss'
 })
 export class ProjectComponent implements OnInit, AfterViewInit {

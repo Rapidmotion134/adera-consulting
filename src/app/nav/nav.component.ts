@@ -14,17 +14,18 @@ import {MatBadge} from '@angular/material/badge';
 import {DocumentDialog} from '../documents/document-dialog';
 
 @Component({
-    selector: 'app-nav',
-    templateUrl: './nav.component.html',
-    styleUrl: './nav.component.scss',
-    imports: [MatButtonModule, MatMenuModule, MatDivider, MatBadge, TitleCasePipe, RouterLink, NgOptimizedImage],
-    animations: [
-        trigger('detailExpand', [
-            state('opened', style({ visibility: 'visible', opacity: 1 })),
-            state('closed', style({ visibility: 'hidden', opacity: 0 })),
-            transition('opened <=> closed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-        ]),
-    ]
+  selector: 'app-nav',
+  templateUrl: './nav.component.html',
+  styleUrl: './nav.component.scss',
+  imports: [MatButtonModule, MatMenuModule, MatDivider, MatBadge, TitleCasePipe, RouterLink, NgOptimizedImage],
+  standalone: true,
+  animations: [
+    trigger('detailExpand', [
+      state('opened', style({visibility: 'visible', opacity: 1})),
+      state('closed', style({visibility: 'hidden', opacity: 0})),
+      transition('opened <=> closed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class NavComponent implements OnInit, AfterViewInit {
 
