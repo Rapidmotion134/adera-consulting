@@ -55,7 +55,10 @@ export class ViewUserComponent implements OnInit {
 
   confirmation() {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
-      minWidth: 700
+      minWidth: 700,
+      data: {
+        isUser: true
+      }
     });
 
     dialogRef.afterClosed().subscribe((result: Boolean) => {

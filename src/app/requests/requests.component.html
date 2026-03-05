@@ -68,11 +68,11 @@
     <div class="pages-container">
 			@if (state === 0) {
 				<div class="container">
-          <div class="option" (click)="state = 3">Support Request (የድጋፍ ጥያቄ)</div>
           <div class="option" (click)="state = 1">Service Request (የአገልግሎት ጥያቄ)</div>
+          <div class="option" (click)="state = 3">Support Request (የድጋፍ ጥያቄ)</div>
           <div class="option" (click)="state = 2">Appointment Request (የቀጠሮ ጥያቄ)</div>
-				</div>
-			} @else if (state === 1) {
+        </div>
+      } @else if (state === 1) {
 				<p class="header">Service Request</p>
 				@for (page of services; track page.id) {
 					<div class="page" (click)="window.open(`https://${page.url}`, '_blank', 'noopener,noreferrer')">

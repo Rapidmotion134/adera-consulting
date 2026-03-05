@@ -10,7 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 @Component({
-  selector: 'app-pages',
+  selector: 'app-requests',
   imports: [
     NgOptimizedImage,
     MatTableModule,
@@ -18,10 +18,10 @@ import {environment} from '../../environments/environment';
     MatPaginator,
     RouterLink,
   ],
-  templateUrl: './pages.component.html',
-  styleUrl: './pages.component.scss'
+  templateUrl: './requests.component.html',
+  styleUrl: './requests.component.scss'
 })
-export class PagesComponent implements OnInit {
+export class RequestsComponent implements OnInit {
 
   baseUrl: string = environment.baseUrl;
   isAdmin!: boolean;

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, inject, OnInit, ViewChild} from '@angular/core';
 import {DatePipe, TitleCasePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -9,6 +9,8 @@ import {environment} from '../../environments/environment';
 import {Project} from '../interfaces';
 import {HttpClient} from '@angular/common/http';
 import {DataService} from '../data.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmationDialog} from '../view-user/confirmation-dialog';
 
 @Component({
   selector: 'app-project',
@@ -31,6 +33,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
   search: any;
   isAdmin!: boolean;
   isSuperAdmin: boolean = JSON.parse(`${localStorage.getItem('isSuper')}`);
+  dialog = inject(MatDialog);
 
   displayedColumns: string[] = ['no', 'title', 'user', 'admin', 'start-date', 'due-date', 'actions'];
   dataSource: MatTableDataSource<Project> = new MatTableDataSource();
@@ -88,6 +91,29 @@ export class ProjectComponent implements OnInit, AfterViewInit {
   onInputChange() {
     this.filteredDataSource.data = this.dataSource.filteredData.filter((data) => {
       return data?.user.firstName.toLowerCase().includes(this.search.toLowerCase());
+    });
+  }
+
+  deleteProject(project: Project) {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      minWidth: 700,
+      data: {
+        isUser: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: Boolean) => {
+      if (result) {
+        this.http.delete(this.baseUrl + `project/${project.id}`)
+          .subscribe((data) => {
+            if (data) {
+              this.dataSource.data = this.dataSource.data.filter(
+                p => p.id !== project.id
+              );
+              this.filteredDataSource.data = this.dataSource.data;
+            }
+          });
+      }
     });
   }
 

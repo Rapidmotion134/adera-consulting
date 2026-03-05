@@ -8,15 +8,15 @@ import {Page} from '../interfaces';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-create-page',
+  selector: 'app-create-request',
   imports: [
     DragAndDropUploadComponent,
     FormsModule
   ],
-  templateUrl: './create-page.html',
-  styleUrl: './create-page.scss'
+  templateUrl: './create-request.component.html',
+  styleUrl: './create-request.component.scss'
 })
-export class CreatePage implements OnInit {
+export class CreateRequestComponent implements OnInit {
 
   baseUrl: string = environment.baseUrl;
   pageId!: number;

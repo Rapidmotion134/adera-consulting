@@ -8,7 +8,6 @@ import {
 } from "@angular/material/dialog";
 import {Component, inject} from "@angular/core";
 import {MatButton} from "@angular/material/button";
-import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'document-dialog',

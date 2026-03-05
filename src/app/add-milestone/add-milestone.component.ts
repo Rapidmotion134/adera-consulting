@@ -32,6 +32,7 @@ export class AddMilestoneComponent implements OnInit {
   users: User[] = [];
   user!: User;
   projectName: string = '';
+  description: string = '';
   admins: User[] = [];
   admin!: User;
   lastUpdated: Date = new Date();
@@ -49,9 +50,10 @@ export class AddMilestoneComponent implements OnInit {
     tasks: []
   }];
 
-  constructor(private location: Location,
-              private http: HttpClient,
-              private activatedRoute: ActivatedRoute
+  constructor(
+    private location: Location,
+    private http: HttpClient,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +62,6 @@ export class AddMilestoneComponent implements OnInit {
         if (data[1].path === 'edit') {
           this.isEdit = true;
           this.projectId = data[2].path;
-          console.log(this.projectId);
         }
       });
     if(!this.isEdit) {
@@ -81,6 +82,7 @@ export class AddMilestoneComponent implements OnInit {
           if (data) {
             this.lastUpdated = data.lastUpdated;
             this.projectName = data.title;
+            this.description = data.description;
             this.admin = data.admin;
             this.startDate = data.startDate;
             this.finishDate = data.dueDate;
@@ -97,7 +99,6 @@ export class AddMilestoneComponent implements OnInit {
         });
     }
   }
-
 
   navigateBack() {
     this.location.back();
@@ -133,13 +134,13 @@ export class AddMilestoneComponent implements OnInit {
 
   createProject() {
     if (this.isSuperAdmin) {
-      if (this.user && this.admin && this.startDate && this.finishDate && this.projectName) {
+      if (this.user && this.admin && this.startDate && this.finishDate && this.projectName && this.description) {
         this.http.post<Project>(this.baseUrl + `project/`, {
           user: this.user, title: this.projectName, admin: this.admin, startDate: this.startDate,
           dueDate: this.finishDate, milestones: this.milestones.length ? this.milestones : null,
+          description: this.description
         }).subscribe((data) => {
           if (data) {
-            console.log(data);
             this.success = true;
           }
         })
@@ -147,13 +148,12 @@ export class AddMilestoneComponent implements OnInit {
         this.isError = true;
       }
     } else {
-      if (this.user && this.startDate && this.finishDate && this.projectName) {
+      if (this.user && this.startDate && this.finishDate && this.projectName && this.description) {
         this.http.post<Project>(this.baseUrl + `project/`, {
-          user: this.user, title: this.projectName, startDate: this.startDate,
+          user: this.user, title: this.projectName, startDate: this.startDate, description: this.description,
           dueDate: this.finishDate, milestones: this.milestones.length ? this.milestones : null,
         }).subscribe((data) => {
           if (data) {
-            console.log(data);
             this.success = true;
           }
         })
@@ -165,9 +165,9 @@ export class AddMilestoneComponent implements OnInit {
 
   editProject() {
     if (this.isSuperAdmin) {
-      if (this.admin && this.startDate && this.finishDate && this.projectName) {
+      if (this.admin && this.startDate && this.finishDate && this.projectName && this.description) {
         this.http.patch<Project>(this.baseUrl + `project/${this.projectId}/`, {
-          title: this.projectName, admin: this.admin, startDate: this.startDate,
+          title: this.projectName, admin: this.admin, startDate: this.startDate, description: this.description,
           dueDate: this.finishDate, milestones: this.milestones.length ? this.milestones : null,
         }).subscribe((data) => {
           if (data) {
@@ -178,9 +178,9 @@ export class AddMilestoneComponent implements OnInit {
         this.isError = true;
       }
     } else {
-      if (this.startDate && this.finishDate && this.projectName) {
+      if (this.startDate && this.finishDate && this.projectName && this.description) {
         this.http.patch<Project>(this.baseUrl + `project/${this.projectId}/`, {
-          title: this.projectName, admin: this.admin, startDate: this.startDate,
+          title: this.projectName, admin: this.admin, startDate: this.startDate, description: this.description,
           dueDate: this.finishDate, milestones: this.milestones.length ? this.milestones : null,
         }).subscribe((data) => {
           if (data) {

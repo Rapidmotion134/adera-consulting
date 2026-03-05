@@ -7,13 +7,13 @@ import {SelectUserComponent} from './select-user/select-user.component';
 import {UsersComponent} from './users/users.component';
 import {AttachFilesComponent} from './attach-files/attach-files.component';
 import {PaymentComponent} from './payment/payment.component';
-import {PagesComponent} from './pages/pages.component';
+import {RequestsComponent} from './requests/requests.component';
 import {GeneratePaymentComponent} from './payment-request/generate-payment.component';
-import {CreatePage} from './create-page/create-page';
+import {CreateRequestComponent} from './create-request/create-request.component';
 import {CreateAccountComponent} from "./create-account/create-account.component";
 import {NotificationsComponent} from "./notifications/notifications.component";
 import {ViewUserComponent} from './view-user/view-user.component';
-import { RegistrationComponent } from './registration/registration.component';
+import {RegistrationComponent} from './registration/registration.component';
 import {MilestonesComponent} from './milestones/milestones.component';
 import {AddMilestoneComponent} from './add-milestone/add-milestone.component';
 import {ProjectComponent} from './project/project.component';
@@ -41,9 +41,9 @@ export const routes: Routes = [
   { path: 'payment/select', pathMatch: 'full', component: SelectUserComponent, canActivate: [AuthGuard] },
   { path: 'payment/sendTo/:userId', pathMatch: 'full', component: GeneratePaymentComponent, canActivate: [AuthGuard] },
   { path: 'payment/attach/:paymentId', pathMatch: 'full', component: AttachFilesComponent, canActivate: [AuthGuard] },
-  { path: 'requests', pathMatch: 'full', component: PagesComponent, canActivate: [AuthGuard] },
-  { path: 'requests/create', pathMatch: 'full', component: CreatePage, canActivate: [AuthGuard] },
-  { path: 'requests/edit', pathMatch: 'full', component: CreatePage, canActivate: [AuthGuard] },
+  { path: 'requests', pathMatch: 'full', component: RequestsComponent, canActivate: [AuthGuard] },
+  { path: 'requests/create', pathMatch: 'full', component: CreateRequestComponent, canActivate: [AuthGuard] },
+  { path: 'requests/edit', pathMatch: 'full', component: CreateRequestComponent, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
 ];
