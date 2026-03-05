@@ -8,7 +8,6 @@ import {Clipboard} from "@angular/cdk/clipboard";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialog} from "./confirmation-dialog";
 import {DataService} from '../data.service';
-import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-view-user',
