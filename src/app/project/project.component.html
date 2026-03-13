@@ -77,9 +77,11 @@
             <p class="view" [routerLink]="['/', 'projects', 'milestones', project.id]">
               View
             </p>
-            <p class="view" (click)="deleteProject(project)">
-              Delete
-            </p>
+            @if (isSuperAdmin) {
+              <p class="view" (click)="deleteProject(project)">
+                Delete
+              </p>
+            }
           </div>
         </td>
       </ng-container>

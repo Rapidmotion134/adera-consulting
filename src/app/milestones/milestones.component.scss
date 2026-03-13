@@ -34,6 +34,19 @@
       margin: 0;
     }
 
+    .description {
+      grid-column: 1/-1;
+
+      h4 {
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+        font-size: 14px;
+      }
+    }
+
     .phase {
       display: grid;
       padding: 1rem;

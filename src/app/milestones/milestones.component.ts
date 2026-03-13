@@ -32,6 +32,7 @@ export class MilestonesComponent implements OnInit {
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Task | null;
   projectId!: string;
+  projectDescription!: string;
   dialog = inject(MatDialog);
 
   constructor(
@@ -58,6 +59,7 @@ export class MilestonesComponent implements OnInit {
     this.http.get<Project>(this.baseUrl + `project/${projectId}`)
       .subscribe((data) => {
         if (data) {
+          this.projectDescription = data.description;
           this.milestones = data.milestones;
           this.selectedMilestone = data.milestones[0].id;
           this.dataSource = new MatTableDataSource(data.milestones[0].tasks);
