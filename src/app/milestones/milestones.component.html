@@ -60,7 +60,7 @@
       </div>
     }
     <div class="description">
-      <h4>Description</h4>
+      <h4>Project Description</h4>
       <p>{{ projectDescription }}</p>
     </div>
   </div>
@@ -121,7 +121,13 @@
           <div class="detail-wrapper"
                [class.detail-wrapper-expanded]="isExpanded(task)">
             <div class="files">
-              <h5>Supporting Documents</h5>
+              <div style="grid-column: 1/-1; margin: 0">
+                <h4>Task Description</h4>
+                <p style="margin: 0; font-size: 14px">
+                  {{ task.description }}
+                </p>
+              </div>
+              <h4>Supporting Documents</h4>
               @for (file of task.documents; track $index;) {
                 <div class="file">
                   <div class="detail">
